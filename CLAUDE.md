@@ -4,16 +4,15 @@
 
 Answer Engine Optimization (AEO) content engine that generates, stores, and publishes AI-crawler-optimized blog content with JSON-LD structured data and auto-generated sitemaps.
 
-**Core Loop:** Generate → Store (Contentful) → Approve → Publish (Static Site) → Track → Learn → Improve
+**Core Loop:** Generate → Store (WordPress) → Approve → Publish (WordPress Pages) → Track → Learn → Improve
 
 ## Tech Stack
 
 - **Backend:** Python / FastAPI
-- **CMS / Database:** Contentful (headless CMS — no PostgreSQL)
+- **CMS / Hosting:** WordPress (REST API — stores and hosts full HTML pages directly)
 - **AI Generation:** Google Gemini API
 - **Deduplication:** HuggingFace `all-MiniLM-L6-v2` (sentence-transformers) for semantic similarity
 - **Admin UI:** React + TypeScript + Tailwind CSS (Vite)
-- **Public Site:** Next.js (static site generation) with JSON-LD + sitemaps
 - **Infrastructure:** Docker (no Redis)
 
 ## Content Categories
@@ -35,7 +34,7 @@ AEOAgents/
 │   └── app/
 │       ├── main.py
 │       ├── config.py
-│       ├── contentful_client.py
+│       ├── wordpress_client.py
 │       ├── api/          # REST endpoints
 │       ├── schemas/      # Pydantic models
 │       └── services/     # generation, jsonld, dedup, tagging
@@ -44,19 +43,15 @@ AEOAgents/
 │       ├── pages/        # ContentLibrary, ApprovalQueue, GenerateContent
 │       ├── components/   # Layout, ContentCard, GenerateModal, JsonLdPreview
 │       └── hooks/
-└── site/             # Next.js static site (public-facing blog)
-    └── src/
-        ├── app/          # Pages, sitemap.ts, robots.ts
-        └── lib/          # Contentful client, JSON-LD renderer
 ```
 
 ## Key Architecture Decisions
 
-- **Contentful is the database** — all content, metadata, and structured data stored there
+- **WordPress is CMS + host** — full HTML pages stored and served directly as WordPress pages via REST API
+- **Auth via Application Passwords** — WordPress 5.6+ built-in, no plugins needed
 - **Content is generic HTML** — specific data (names, numbers, facts) injected via JSON-LD
 - **No Redis/queue** — generation is synchronous via Gemini API
 - **Dedup uses local model** — `all-MiniLM-L6-v2` runs in Docker container, no external API calls
-- **Static site generation** — Next.js pulls from Contentful CDA, renders HTML with JSON-LD + sitemaps
 - **AI crawler friendly** — robots.txt allows GPTBot, PerplexityBot, Google-Extended, etc.
 
 ## Running Locally
@@ -72,6 +67,6 @@ docker compose up --build
 ## Environment Variables
 
 See `.env.example` for required variables:
-- `CONTENTFUL_SPACE_ID`, `CONTENTFUL_MANAGEMENT_TOKEN`, `CONTENTFUL_DELIVERY_TOKEN`
+- `WORDPRESS_URL`, `WORDPRESS_USERNAME`, `WORDPRESS_APP_PASSWORD`
 - `GEMINI_API_KEY`
 - `SITE_URL`

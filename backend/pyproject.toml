@@ -1,0 +1,24 @@
+[project]
+name = "aeo-agents-backend"
+version = "0.1.0"
+description = "AEO Agents - AI Visibility Engine Backend"
+authors = [
+    {name = "Prabhas Kalyan"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.136.0,<0.137.0",
+    "uvicorn[standard]>=0.44.0,<0.45.0",
+    "pydantic-settings>=2.13.1,<3.0.0",
+    "google-genai>=1.73.1,<2.0.0",
+    "sentence-transformers>=5.4.1,<6.0.0",
+    "httpx>=0.28.1,<0.29.0",
+    "beautifulsoup4>=4.14.3,<5.0.0",
+    "python-dotenv>=1.2.2,<2.0.0"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
