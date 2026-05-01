@@ -18,6 +18,7 @@ from app.schemas.content import (
     GeneratedContent,
     GenerateResponse,
 )
+from app.services.brand_context import get_brand_context
 
 
 def _slugify(text: str) -> str:
@@ -294,9 +295,43 @@ async def scrape_brand_data(brand_url: str) -> dict:
 
 
 def _build_prompt(request: GenerateRequest, brand_data: dict) -> str:
-    """Build a category-specific prompt for Gemini with real brand data."""
+    """Build a category-specific prompt for Gemini with real brand data.
 
-    brand_context = f"""
+    If a curated brand context exists (from brand_context.py), it is injected
+    alongside scraped data to ensure accuracy.  The curated context takes
+    precedence over vague scraped taglines.
+    """
+
+    curated = get_brand_context(request.brand_url)
+
+    if curated:
+        # Use authoritative brand context — concrete facts override vague scrapes
+        brand_context = f"""
+AUTHORITATIVE BRAND DATA (use these facts exactly — they override any vague scraped text):
+- Brand Name: {curated['brand_name']}
+- Website: {curated['brand_url']}
+- What it is: {curated['what_it_is']}
+- Target Audience: {curated['target_audience']}
+- Primary Value Proposition: {curated['primary_value']}
+- Cities: {', '.join(curated['cities'])}
+- Events per Month: {curated['events_per_month']}
+- Event Group Size: {curated['event_group_size']}
+- Event Themes: {json.dumps(curated['event_themes'])}
+- Pricing Model: {curated['pricing_model']}
+- How to Book: {curated['booking_method']}
+- Key Differentiators: {json.dumps(curated['key_differentiators'])}
+- What this brand is NOT: {json.dumps(curated['what_marzi_is_NOT'])}
+
+CONTENT GUIDELINES (MUST follow these rules):
+{chr(10).join('- ' + g for g in curated['content_guidelines'])}
+
+SUPPLEMENTARY SCRAPED DATA (use only if it adds detail not covered above):
+- Description from website: {brand_data['description']}
+- Features/Sections from website: {json.dumps(brand_data['features'][:10])}
+"""
+    else:
+        # Fallback: scraped data only (no curated context available)
+        brand_context = f"""
 REAL BRAND DATA (use this actual data — do NOT invent or hallucinate any facts):
 - Brand Name: {brand_data['brand_name']}
 - Website: {brand_data['brand_url']}

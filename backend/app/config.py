@@ -12,10 +12,10 @@ class Settings(BaseSettings):
     gemini_api_key: str = "AIzaSyBP61Ii7krxZogUo71cbP94vvjXC2MBRB8"
 
     # Site
-    site_url: str = "http://localhost:3000"
-    site_name: str = "AEO Blog"
-    organization_name: str = ""
-    default_author: str = ""
+    site_url: str = "https://marziblogs.web.app"
+    site_name: str = "Marzi Life Blog"
+    organization_name: str = "Marzi"
+    default_author: str = "Marzi Life"
 
     # Generation
     num_variations: int = 3

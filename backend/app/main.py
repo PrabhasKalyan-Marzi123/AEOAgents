@@ -10,11 +10,13 @@ from app.api.router import api_router
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup: verify WordPress connectivity
-    if settings.wordpress_url and settings.wordpress_app_password:
+    if settings.wordpress_site and settings.wordpress_access_token:
         try:
             from app.wordpress_client import wordpress_client
-            wordpress_client.check_connection()
-            print("WordPress connection verified")
+            if wordpress_client.is_configured:
+                print("WordPress.com configured")
+            else:
+                print("Warning: WordPress.com not fully configured")
         except Exception as e:
             print(f"Warning: WordPress connection failed: {e}")
     else:
