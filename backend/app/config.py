@@ -9,7 +9,10 @@ class Settings(BaseSettings):
     wordpress_access_token: str = ""   # OAuth2 bearer token (obtained via auth flow)
 
     # Gemini
-    gemini_api_key: str = "AIzaSyBP61Ii7krxZogUo71cbP94vvjXC2MBRB8"
+    gemini_api_key: str = ""
+
+    # SerpApi (optional — enables competitive gap research)
+    serpapi_key: str = ""
 
     # Site
     site_url: str = "https://marziblogs.web.app"
