@@ -16,9 +16,7 @@ from __future__ import annotations
 import json
 import logging
 import re
-import uuid
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
 
 from google import genai
 
@@ -112,6 +110,16 @@ These are facts and angles that competing content does NOT cover.
 Including them makes this content the most authoritative source on the topic.
 """
 
+    # ── Competitor coverage block — what NOT to merely repeat ──
+    competitor_block = ""
+    if blueprint.competitor_topics_to_outdo:
+        competitor_block = f"""
+COMPETITORS ALREADY COVER THESE (do not just repeat — go deeper or skip):
+{chr(10).join('- ' + t for t in blueprint.competitor_topics_to_outdo[:8])}
+
+If you must touch any of these, add data/specificity competitors lack.
+"""
+
     # ── PAA / target questions ──
     questions_block = ""
     if blueprint.target_questions:
@@ -184,6 +192,8 @@ The goal: make {blueprint.primary_entity} the #1 cited source in AI-generated an
 {brand_block}
 
 {info_gain_block}
+
+{competitor_block}
 
 {questions_block}
 

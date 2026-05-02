@@ -1,0 +1,146 @@
+11:25:33 [app.agents.pipeline] INFO: ============================================================
+11:25:33 [app.agents.pipeline] INFO: AEO Pipeline: 1 topics, brand=https://marzi.life
+11:25:33 [app.agents.pipeline] INFO: ============================================================
+11:25:33 [app.agents.pipeline] INFO: 
+--- Topic 1/1: social activities for retirees in Bangalore ---
+11:25:33 [app.agents.pipeline] INFO: [Pipeline] Agent 1: Researching...
+11:25:33 [app.agents.researcher] INFO: [Researcher] Starting research: topic='social activities for retirees in Bangalore' brand='https://marzi.life'
+11:25:33 [httpx] INFO: HTTP Request: GET https://marzi.life "HTTP/1.1 200 OK"
+11:25:33 [httpx] INFO: HTTP Request: GET https://marzi.life/assets/index-DFcUnJ6n.css "HTTP/1.1 200 OK"
+11:25:33 [app.agents.researcher] INFO: [Researcher] Scraped brand: Marzi
+11:25:33 [app.agents.researcher] INFO: [Researcher] Curated brand context loaded
+11:25:34 [httpx] INFO: HTTP Request: GET https://serpapi.com/search.json?q=social+activities+for+retirees+in+Bangalore&api_key=88e9df8bf5192113827878d7de00a1f19f57e04ff7d49e944acdd7d9a9f4a653&engine=google&num=10&gl=in&hl=en "HTTP/1.1 200 OK"
+11:25:34 [httpx] INFO: HTTP Request: GET https://serpapi.com/search.json?q=Marzi+social+activities+for+retirees+in+Bangalore&api_key=88e9df8bf5192113827878d7de00a1f19f57e04ff7d49e944acdd7d9a9f4a653&engine=google&num=10&gl=in&hl=en "HTTP/1.1 200 OK"
+11:25:34 [app.agents.researcher] INFO: [Researcher] SERP: 18 organic, 7 PAA, 16 related, answer_box=no
+11:25:34 [app.agents.researcher] INFO: [Researcher] SERP intent=faq (confidence=0.615, signals={'howto': 0, 'comparison': 0, 'faq': 8, 'informational': 5})
+11:25:34 [google_genai.models] INFO: AFC is enabled with max remote calls: 10.
+11:25:48 [httpx] INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+11:25:48 [app.agents.researcher] INFO: [Researcher] Gap analysis: 6 gaps, 6 angles, 7 competitor topics covered
+11:25:48 [app.agents.pipeline] INFO: [Researcher] Result:
+  brand: Marzi
+  serp_intent: faq (confidence=0.615, signals={'howto': 0, 'comparison': 0, 'faq': 8, 'informational': 5})
+  organic_results: 18 | paa: 7 | related: 16 | answer_box: no
+  people_also_ask:
+    • What is the most popular activity for retirees?
+    • Where do retired people socialize?
+    • Where can senior citizens go in Bangalore?
+    • Where can I socialize in Bangalore?
+    • How to make friends in Bangalore for free?
+    • … (+2 more)
+  competitor_topics_covered:
+    • General senior citizen activity ideas (parks, temples, walks)
+    • Wellness and fitness classes (yoga, Zumba, laughter clubs)
+    • Online/hybrid senior communities and groups (Meetup, WhatsApp)
+    • Senior care and companionship services
+    • Listings for senior clubs and activity centers
+    • … (+2 more)
+  gaps:
+    • Lack of platforms offering 20+ exclusively offline, themed social events per month in Bangalore.
+    • Absence of services highlighting a specific 'right group size' (20-60) for meaningful senior interactions.
+    • Missing options for seniors to pay per event only without subscriptions or recurring commitments.
+    • Limited focus on diverse, curated themes like storytelling, dance, or specific music sessions for seniors.
+    • No clear mention of an app-first booking experience for senior social events.
+    • … (+1 more)
+  unique_angles:
+    • 20+ unique, in-person social events monthly in Bangalore, exclusively for people above 55.
+    • Connect authentically in group sizes of 20-60 participants at every Marzi event.
+    • Pay-per-event model: No subscriptions or recurring fees, just pay for the events you love.
+    • Explore diverse themes like music, dance, book clubs, and storytelling, all offline and curated.
+    • Effortless event discovery and booking for Bangalore seniors via the Marzi app.
+    • … (+1 more)
+  suggested_title: Marzi: 20+ Themed Offline Social Events for 55+ in Bangalore – Pay Per Event
+11:25:48 [app.agents.pipeline] INFO: [Pipeline] Agent 2: Strategizing...
+11:25:48 [app.agents.strategist] INFO: [Strategist] Planning content for topic='social activities for retirees in Bangalore'
+11:25:48 [app.agents.strategist] INFO: [Strategist] SERP-derived category: faq (intent=faq, confidence=0.615)
+11:25:48 [app.agents.strategist] INFO: [Strategist] Slug='marzi-social-activities-for-retirees-in-bangalore'
+11:25:48 [app.agents.strategist] INFO: [Strategist] Blueprint: category=faq, 9 sections, 13 facts, 6 angles, 7 competitor topics
+11:25:48 [app.agents.pipeline] INFO: [Strategist] Result:
+  category: faq | schema: FAQPage
+  slug: marzi-social-activities-for-retirees-in-bangalore
+  title_direction: Marzi: 20+ Themed Offline Social Events for 55+ in Bangalore – Pay Per Event
+  primary_entity: Marzi | related: ['Bangalore', 'Mumbai']
+  section_outline (9):
+    • What is the most popular activity for retirees?
+    • Where do retired people socialize?
+    • Where can senior citizens go in Bangalore?
+    • Where can I socialize in Bangalore?
+    • How to make friends in Bangalore for free?
+    • What to do in Bangalore as an 80 year old?
+    • What does the data say about lack of platforms offering 20+ exclusively offline, themed social events per month in Bangalore?
+    • What does the data say about absence of services highlighting a specific 'right group size' (20-60) for meaningful senior interactions?
+    • What about missing options for seniors to pay per event only without subscriptions or recurring commitments?
+  key_facts (13):
+    • Marzi is an app-based platform that organizes themed offline social events and meetups specifically for people above 55. The core experience
+    • Target audience: People above 55 (retired, semi-retired, or looking for social connections)
+    • Cities: Bangalore, Mumbai
+    • 20+ events per month in each city (Bangalore and Mumbai)
+    • Group size: 20 to 60 participants per event
+    • Pricing: No subscription. Pay only for the events you choose to attend. No recurring fees, no commitments.
+    • Booking: App-first. Download the Marzi app, browse upcoming events, select an event, pay for it, and attend.
+    • Event theme: Music sessions (live performances, sing-alongs, music appreciation)
+    • … (+5 more)
+  information_gain_angles (6):
+    • 20+ unique, in-person social events monthly in Bangalore, exclusively for people above 55.
+    • Connect authentically in group sizes of 20-60 participants at every Marzi event.
+    • Pay-per-event model: No subscriptions or recurring fees, just pay for the events you love.
+    • Explore diverse themes like music, dance, book clubs, and storytelling, all offline and curated.
+    • Effortless event discovery and booking for Bangalore seniors via the Marzi app.
+    • … (+1 more)
+11:25:48 [app.agents.pipeline] INFO: [Pipeline] Agent 3: Writing...
+11:25:48 [app.agents.writer] INFO: [Writer] Generating content for slug='marzi-social-activities-for-retirees-in-bangalore'
+11:25:48 [google_genai.models] INFO: AFC is enabled with max remote calls: 10.
+11:26:13 [httpx] INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+11:26:13 [app.agents.writer] INFO: [Writer] Content generated: title='Marzi: 20+ Themed Offline Social Events for 55+ in Bangalore – Pay Per Event', 8 tags
+11:26:13 [app.agents.pipeline] INFO: [Writer] Result:
+  title: Marzi: 20+ Themed Offline Social Events for 55+ in Bangalore – Pay Per Event
+  slug: marzi-social-activities-for-retirees-in-bangalore | category: faq
+  meta_description: Discover Marzi: an app for 55+ in Bangalore & Mumbai, offering 20+ themed offline social events monthly. Pay per event for music, dance, book clubs, and more.
+  tags: ['Marzi', 'senior activities Bangalore', '55+ social events', 'offline meetups Bangalore', 'retiree activities Mumbai', 'pay-per-event senior activities', 'themed events for seniors', 'socializing for 55+']
+  html_length: 10029 chars
+  jsonld_specific_data keys: ['mentions', 'features', 'pricing', 'ratings', 'key_facts']
+11:26:13 [app.agents.pipeline] INFO: [Pipeline] Agent 4: Compiling...
+11:26:13 [app.agents.compiler] INFO: [Compiler] Compiling page: slug='marzi-social-activities-for-retirees-in-bangalore'
+11:26:13 [app.agents.compiler] INFO: [Compiler] JSON-LD generated: @type=FAQPage
+11:26:13 [app.agents.compiler] INFO: [Compiler] Written: /Users/prabhaskalyan/AEOAgents/firebase-hosting/public/marzi-social-activities-for-retirees-in-bangalore.html (35457 bytes)
+11:26:13 [app.agents.pipeline] INFO: [Compiler] Result:
+  file: /Users/prabhaskalyan/AEOAgents/firebase-hosting/public/marzi-social-activities-for-retirees-in-bangalore.html (35457 bytes)
+  jsonld @type: FAQPage
+  category: faq | tags: ['Marzi', 'senior activities Bangalore', '55+ social events', 'offline meetups Bangalore', 'retiree activities Mumbai', 'pay-per-event senior activities', 'themed events for seniors', 'socializing for 55+']
+11:26:13 [app.agents.pipeline] INFO: 
+--- Agent 5: Distributing 1 pages ---
+11:26:13 [app.agents.distributor] INFO: [Distributor] Starting distribution for 1 pages
+11:26:13 [app.agents.distributor] INFO: [Distributor] Index updated: /Users/prabhaskalyan/AEOAgents/firebase-hosting/public/index.html
+11:26:13 [app.agents.distributor] INFO: [Distributor] Sitemap generated: /Users/prabhaskalyan/AEOAgents/firebase-hosting/public/sitemap.xml
+11:26:13 [app.agents.distributor] INFO: [Distributor] robots.txt generated: /Users/prabhaskalyan/AEOAgents/firebase-hosting/public/robots.txt
+11:26:29 [app.agents.distributor] INFO: [Distributor] Firebase deploy succeeded
+11:26:29 [app.agents.distributor] INFO: [Distributor] Done: index=True, sitemap=True, deployed=True
+11:26:29 [app.agents.pipeline] INFO: [Distributor] Result:
+  index updated: True | sitemap: True | robots: True
+  deploy: deployed
+  live_urls (1):
+    • https://marziblogs.web.app/marzi-social-activities-for-retirees-in-bangalore
+11:26:29 [app.agents.pipeline] INFO: 
+============================================================
+11:26:29 [app.agents.pipeline] INFO: Pipeline complete: 1 pages compiled, 0 errors
+11:26:29 [app.agents.pipeline] INFO: ============================================================
+
+============================================================
+AEO 5-Agent Pipeline
+Brand: https://marzi.life
+Topics: 1
+Deploy: True
+============================================================
+
+
+============================================================
+RESULTS
+============================================================
+Pages compiled: 1
+  • Marzi: 20+ Themed Offline Social Events for 55+ in Bangalore – Pay Per Event
+    → /Users/prabhaskalyan/AEOAgents/firebase-hosting/public/marzi-social-activities-for-retirees-in-bangalore.html
+
+Deployment: SUCCESS
+Live URLs:
+  → https://marziblogs.web.app/marzi-social-activities-for-retirees-in-bangalore
+============================================================
+

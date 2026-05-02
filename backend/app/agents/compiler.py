@@ -13,7 +13,6 @@ Output: CompiledPage with file path and metadata.
 from __future__ import annotations
 
 import logging
-import os
 from dataclasses import dataclass
 from pathlib import Path
 

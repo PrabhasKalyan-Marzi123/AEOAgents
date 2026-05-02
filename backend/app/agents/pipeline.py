@@ -20,9 +20,9 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 from app.schemas.content import ContentCategory
-from app.agents.researcher import ResearcherAgent, ResearchDossier
-from app.agents.strategist import StrategistAgent, ContentBlueprint
-from app.agents.writer import WriterAgent, WrittenContent
+from app.agents.researcher import ResearcherAgent
+from app.agents.strategist import StrategistAgent
+from app.agents.writer import WriterAgent
 from app.agents.compiler import CompilerAgent, CompiledPage
 from app.agents.distributor import DistributorAgent, DeploymentResult
 
@@ -107,23 +107,26 @@ async def run_pipeline(config: PipelineConfig) -> PipelineResult:
 
         try:
             # Agent 1: Research
-            logger.info(f"[Pipeline] Agent 1: Researching...")
+            logger.info("[Pipeline] Agent 1: Researching...")
             dossier = await researcher.run(topic=topic, brand_url=config.brand_url)
+            _log_researcher_result(dossier)
 
             # Agent 2: Strategize
-            logger.info(f"[Pipeline] Agent 2: Strategizing...")
+            logger.info("[Pipeline] Agent 2: Strategizing...")
             blueprint = strategist.run(dossier, category_override=topic_cfg.category)
+            _log_strategist_result(blueprint)
 
             # Agent 3: Write
-            logger.info(f"[Pipeline] Agent 3: Writing...")
+            logger.info("[Pipeline] Agent 3: Writing...")
             written = await writer.run(blueprint)
+            _log_writer_result(written)
 
             # Agent 4: Compile
-            logger.info(f"[Pipeline] Agent 4: Compiling...")
+            logger.info("[Pipeline] Agent 4: Compiling...")
             compiled = compiler.run(written)
+            _log_compiler_result(compiled)
 
             result.pages.append(compiled)
-            logger.info(f"[Pipeline] ✓ {compiled.title} → {compiled.file_path}")
 
         except Exception as e:
             error_msg = f"Failed on topic '{topic}': {e}"
@@ -138,15 +141,7 @@ async def run_pipeline(config: PipelineConfig) -> PipelineResult:
         try:
             deployment = distributor.run(result.pages, deploy=config.deploy)
             result.deployment = deployment
-
-            if deployment.deployed:
-                logger.info("[Pipeline] Deployed to Firebase successfully")
-                for url in deployment.live_urls:
-                    logger.info(f"  → {url}")
-            elif not config.deploy:
-                logger.info("[Pipeline] Files compiled locally (deploy=False)")
-            else:
-                logger.warning(f"[Pipeline] Deploy failed: {deployment.deploy_output[:200]}")
+            _log_distributor_result(deployment, requested_deploy=config.deploy)
         except Exception as e:
             error_msg = f"Distribution failed: {e}"
             logger.error(f"[Pipeline] ✗ {error_msg}")
@@ -162,23 +157,87 @@ async def run_pipeline(config: PipelineConfig) -> PipelineResult:
     return result
 
 
+# ── Per-agent result logging ──
+
+def _bullets(items, limit=5, prefix="    • "):
+    """Format a list of items as indented bullets, truncated."""
+    out = []
+    for s in (items or [])[:limit]:
+        out.append(f"{prefix}{str(s)[:140]}")
+    if items and len(items) > limit:
+        out.append(f"{prefix}… (+{len(items) - limit} more)")
+    return "\n".join(out) if out else f"{prefix}(none)"
+
+
+def _log_researcher_result(dossier) -> None:
+    logger.info(
+        "[Researcher] Result:\n"
+        f"  brand: {(dossier.curated_context or {}).get('brand_name') or dossier.brand_data.get('brand_name', 'unknown')}\n"
+        f"  serp_intent: {dossier.serp_intent} (confidence={dossier.intent_confidence}, signals={dossier.intent_signals})\n"
+        f"  organic_results: {len(dossier.top_competitor_snippets)} | paa: {len(dossier.people_also_ask)} | related: {len(dossier.related_searches)} | answer_box: {'yes' if dossier.answer_box else 'no'}\n"
+        f"  people_also_ask:\n{_bullets(dossier.people_also_ask)}\n"
+        f"  competitor_topics_covered:\n{_bullets(dossier.competitor_topics_covered)}\n"
+        f"  gaps:\n{_bullets(dossier.gaps)}\n"
+        f"  unique_angles:\n{_bullets(dossier.unique_angles)}\n"
+        f"  suggested_title: {dossier.suggested_title_direction or '(none)'}"
+    )
+
+
+def _log_strategist_result(blueprint) -> None:
+    logger.info(
+        "[Strategist] Result:\n"
+        f"  category: {blueprint.category.value} | schema: {blueprint.schema_type}\n"
+        f"  slug: {blueprint.slug}\n"
+        f"  title_direction: {blueprint.title_direction}\n"
+        f"  primary_entity: {blueprint.primary_entity} | related: {blueprint.related_entities}\n"
+        f"  section_outline ({len(blueprint.section_outline)}):\n{_bullets(blueprint.section_outline, limit=12)}\n"
+        f"  key_facts ({len(blueprint.key_facts_to_embed)}):\n{_bullets(blueprint.key_facts_to_embed, limit=8)}\n"
+        f"  information_gain_angles ({len(blueprint.information_gain_angles)}):\n{_bullets(blueprint.information_gain_angles)}"
+    )
+
+
+def _log_writer_result(written) -> None:
+    logger.info(
+        "[Writer] Result:\n"
+        f"  title: {written.title}\n"
+        f"  slug: {written.slug} | category: {written.category.value}\n"
+        f"  meta_description: {written.meta_description}\n"
+        f"  tags: {written.tags}\n"
+        f"  html_length: {len(written.content_html)} chars\n"
+        f"  jsonld_specific_data keys: {list(written.jsonld_data.keys())}"
+    )
+
+
+def _log_compiler_result(compiled) -> None:
+    logger.info(
+        "[Compiler] Result:\n"
+        f"  file: {compiled.file_path} ({len(compiled.full_html)} bytes)\n"
+        f"  jsonld @type: {compiled.jsonld.get('@type', 'unknown')}\n"
+        f"  category: {compiled.category} | tags: {compiled.tags}"
+    )
+
+
+def _log_distributor_result(deployment, requested_deploy: bool) -> None:
+    status = "deployed" if deployment.deployed else ("skipped" if not requested_deploy else "failed")
+    logger.info(
+        "[Distributor] Result:\n"
+        f"  index updated: {deployment.index_updated} | sitemap: {deployment.sitemap_generated} | robots: {deployment.robots_generated}\n"
+        f"  deploy: {status}\n"
+        f"  live_urls ({len(deployment.live_urls)}):\n{_bullets(deployment.live_urls, limit=10)}"
+    )
+    if not deployment.deployed and requested_deploy and deployment.deploy_output:
+        logger.warning(f"[Distributor] Deploy output: {deployment.deploy_output[:300]}")
+
+
 # ── Default Marzi topics ──
+#
+# Categories are intentionally NOT pre-set: the Strategist decides each one
+# based on live SerpApi intent. Pass an explicit category on TopicConfig only
+# when you want to force a specific format.
 
 MARZI_TOPICS = [
-    TopicConfig(
-        topic="Marzi offline social events for people above 55 in Bangalore and Mumbai",
-        category=ContentCategory.FAQ,
-    ),
-    TopicConfig(
-        topic="How to get started with Marzi — book your first offline event for 55+",
-        category=ContentCategory.HOW_TO,
-    ),
-    TopicConfig(
-        topic="Marzi vs other social platforms for people above 55 — offline meetups comparison",
-        category=ContentCategory.COMPARISON,
-    ),
-    TopicConfig(
-        topic="What is Marzi — the offline events platform for people above 55",
-        category=ContentCategory.INFORMATIONAL,
-    ),
+    TopicConfig(topic="offline social events for people above 55 in Bangalore"),
+    TopicConfig(topic="how to find friends after retirement in India"),
+    TopicConfig(topic="best social platforms for people above 55 in Mumbai"),
+    TopicConfig(topic="social activities for seniors above 55 in Indian cities"),
 ]
