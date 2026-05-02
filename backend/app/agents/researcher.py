@@ -128,63 +128,7 @@ async def _fetch_serp_data(query: str) -> dict:
         }
 
 
-# ── SERP intent classification (heuristic — fast, deterministic) ──
-
-_HOWTO_PATTERNS = [r"\bhow\s+to\b", r"\bstep[- ]by[- ]step\b", r"\btutorial\b", r"\bguide\b", r"\bsteps\b"]
-_COMPARISON_PATTERNS = [r"\bvs\.?\b", r"\bversus\b", r"\bcompared?\b", r"\bcomparison\b", r"\bbest\b", r"\btop\s+\d+\b", r"\balternatives?\b", r"\breview\b"]
-_FAQ_PATTERNS = [r"\?$", r"\bwhat\s+is\b", r"\bwhy\s+", r"\bwho\s+", r"\bhow\s+much\b", r"\bhow\s+many\b", r"\bfaq\b", r"\bquestions?\b"]
-
-
-def _classify_serp_intent(
-    organic_results: list[dict],
-    people_also_ask: list[str],
-    answer_box: dict,
-) -> tuple[str, float, dict]:
-    """Score SERP results for dominant content intent.
-
-    Returns (intent, confidence, signals_breakdown).
-    """
-    titles = [(r.get("title") or "").lower() for r in organic_results[:10]]
-    snippets = [(r.get("snippet") or "").lower() for r in organic_results[:10]]
-    text_pool = titles + snippets
-
-    scores = {
-        SERP_INTENT_HOWTO: 0,
-        SERP_INTENT_COMPARISON: 0,
-        SERP_INTENT_FAQ: 0,
-        SERP_INTENT_INFORMATIONAL: 0,
-    }
-
-    for text in text_pool:
-        if not text:
-            continue
-        if any(re.search(p, text) for p in _HOWTO_PATTERNS):
-            scores[SERP_INTENT_HOWTO] += 1
-        if any(re.search(p, text) for p in _COMPARISON_PATTERNS):
-            scores[SERP_INTENT_COMPARISON] += 1
-        if any(re.search(p, text) for p in _FAQ_PATTERNS):
-            scores[SERP_INTENT_FAQ] += 1
-
-    # Strong PAA presence is a FAQ signal
-    if len(people_also_ask) >= 4:
-        scores[SERP_INTENT_FAQ] += len(people_also_ask)
-
-    # Answer box of type "list" or with "snippet_highlighted_words" → FAQ-leaning answer surface
-    if answer_box:
-        if answer_box.get("type") in ("list", "organic_result"):
-            scores[SERP_INTENT_FAQ] += 2
-
-    # Informational baseline so we don't return zero
-    scores[SERP_INTENT_INFORMATIONAL] = max(1, len(text_pool) // 4)
-
-    intent = max(scores, key=scores.get)
-    total = sum(scores.values()) or 1
-    confidence = scores[intent] / total
-
-    return intent, round(confidence, 3), scores
-
-
-# ── LLM-driven gap analysis (replaces hardcoded keyword matching) ──
+# ── LLM-driven SERP intent + gap analysis (one Gemini call) ──
 
 def _build_gap_analysis_prompt(
     topic: str,
@@ -249,22 +193,34 @@ ANSWER BOX (if present):
 {json.dumps(answer_box, indent=2)[:1500]}
 
 ANALYSIS TASKS:
-1. competitor_topics_covered — list 5-8 short phrases describing the dominant topics/angles
+1. serp_intent — classify the dominant intent of the live SERP. Choose exactly one of:
+   - "faq" — SERP is dominated by Q&A pages, definitions, "what is/why/who" articles, or strong PAA presence.
+   - "howto" — SERP is dominated by step-by-step guides, tutorials, "how to" pages.
+   - "comparison" — SERP is dominated by "vs", "best", "top N", reviews, alternative roundups.
+   - "informational" — general explanatory articles that don't fit the above (default).
+   Decide based on the actual titles/snippets above, not the topic string alone.
+2. intent_confidence — float 0.0-1.0 reflecting how strongly the SERP leans one way.
+   High confidence (>=0.7) means most top results clearly match the intent.
+3. intent_reasoning — one short sentence (≤120 chars) explaining the classification.
+4. competitor_topics_covered — list 5-8 short phrases describing the dominant topics/angles
    the SERP results already cover well. Be concrete (e.g. "general overview of senior meetups",
    not "social events").
-2. gaps — list 4-8 SPECIFIC information gaps. Each gap must be:
+5. gaps — list 4-8 SPECIFIC information gaps. Each gap must be:
    - A topic, fact, or angle the SERP results genuinely do NOT cover
    - Something {brand_name} can credibly speak to (back it with the BRAND FACTS)
    - Concrete, not generic ("competitors don't quantify event frequency in tier-1 Indian cities",
      not "competitors lack detail")
-3. unique_angles — list 4-8 sharp angles {brand_name} should lead with. Each angle should
+6. unique_angles — list 4-8 sharp angles {brand_name} should lead with. Each angle should
    reference a concrete brand fact (a number, a city, a theme, a pricing detail).
-4. suggested_title_direction — one sentence, ≤80 chars, describing the strongest title
+7. suggested_title_direction — one sentence, ≤80 chars, describing the strongest title
    angle for a piece that would outrank/outshine the current SERP. Should leverage at least
    one gap or unique angle.
 
 Return ONLY valid JSON, no prose:
 {{
+  "serp_intent": "faq|howto|comparison|informational",
+  "intent_confidence": 0.0,
+  "intent_reasoning": "...",
   "competitor_topics_covered": ["...", "..."],
   "gaps": ["...", "..."],
   "unique_angles": ["...", "..."],
@@ -313,7 +269,18 @@ def _llm_gap_analysis(
             logger.error(f"[Researcher] Could not parse LLM gap analysis JSON. Raw head: {raw[:300]!r}")
             return {}
 
+        intent_raw = (parsed.get("serp_intent") or "").strip().lower()
+        intent = intent_raw if intent_raw in VALID_INTENTS else SERP_INTENT_INFORMATIONAL
+        try:
+            confidence = float(parsed.get("intent_confidence") or 0.0)
+        except (TypeError, ValueError):
+            confidence = 0.0
+        confidence = max(0.0, min(1.0, confidence))
+
         return {
+            "serp_intent": intent,
+            "intent_confidence": round(confidence, 3),
+            "intent_reasoning": (parsed.get("intent_reasoning") or "").strip(),
             "competitor_topics_covered": list(parsed.get("competitor_topics_covered", []))[:10],
             "gaps": list(parsed.get("gaps", []))[:10],
             "unique_angles": list(parsed.get("unique_angles", []))[:10],
@@ -436,13 +403,7 @@ class ResearcherAgent:
             f"answer_box={'yes' if answer_box else 'no'}"
         )
 
-        # 4. SERP intent classification (heuristic)
-        intent, confidence, signals = _classify_serp_intent(
-            unique_snippets, unique_paa, answer_box,
-        )
-        logger.info(f"[Researcher] SERP intent={intent} (confidence={confidence}, signals={signals})")
-
-        # 5. LLM-driven Information Gain analysis (live data → real gaps)
+        # 4. LLM-driven SERP intent classification + Information Gain analysis (one call)
         gap_analysis = _llm_gap_analysis(
             topic=topic,
             curated=curated,
@@ -453,11 +414,17 @@ class ResearcherAgent:
             answer_box=answer_box,
         )
 
+        intent = gap_analysis.get("serp_intent") or SERP_INTENT_INFORMATIONAL
+        confidence = float(gap_analysis.get("intent_confidence") or 0.0)
+        intent_reasoning = gap_analysis.get("intent_reasoning", "") or ""
         gaps = gap_analysis.get("gaps", []) or []
         unique_angles = gap_analysis.get("unique_angles", []) or []
         competitor_topics = gap_analysis.get("competitor_topics_covered", []) or []
         suggested_title = gap_analysis.get("suggested_title_direction", "") or ""
 
+        logger.info(
+            f"[Researcher] LLM analysis: intent={intent} (confidence={confidence}) — {intent_reasoning}"
+        )
         logger.info(
             f"[Researcher] Gap analysis: {len(gaps)} gaps, "
             f"{len(unique_angles)} angles, {len(competitor_topics)} competitor topics covered"
@@ -473,7 +440,7 @@ class ResearcherAgent:
             knowledge_graph=knowledge_graph,
             serp_intent=intent,
             intent_confidence=confidence,
-            intent_signals=signals,
+            intent_signals={"reasoning": intent_reasoning} if intent_reasoning else {},
             competitor_topics_covered=competitor_topics,
             gaps=gaps,
             unique_angles=unique_angles,

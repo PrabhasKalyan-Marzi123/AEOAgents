@@ -261,26 +261,37 @@ class WriterAgent:
         logger.info(f"[Writer] Generating content for slug='{blueprint.slug}'")
 
         prompt = _build_writer_prompt(blueprint)
-
-        # Call Gemini
         client = genai.Client(api_key=settings.gemini_api_key)
-        response = client.models.generate_content(
-            model="gemini-2.5-flash",
-            contents=prompt,
-            config=genai.types.GenerateContentConfig(
-                temperature=0.7,
-                max_output_tokens=8000,
-                response_mime_type="application/json",
-            ),
-        )
 
-        # Parse response
-        raw_text = response.text.strip()
-        if raw_text.startswith("```"):
-            raw_text = re.sub(r"^```(?:json)?\n?", "", raw_text)
-            raw_text = re.sub(r"\n?```$", "", raw_text)
+        parsed: dict | None = None
+        last_err: Exception | None = None
+        for attempt in (1, 2):
+            response = client.models.generate_content(
+                model="gemini-2.5-flash",
+                contents=prompt,
+                config=genai.types.GenerateContentConfig(
+                    temperature=0.7,
+                    max_output_tokens=12000,
+                    response_mime_type="application/json",
+                ),
+            )
+            raw_text = (response.text or "").strip()
+            if raw_text.startswith("```"):
+                raw_text = re.sub(r"^```(?:json)?\n?", "", raw_text)
+                raw_text = re.sub(r"\n?```$", "", raw_text)
 
-        parsed = json.loads(raw_text)
+            try:
+                parsed = json.loads(raw_text)
+                break
+            except json.JSONDecodeError as e:
+                last_err = e
+                logger.warning(
+                    f"[Writer] Attempt {attempt} JSON parse failed ({e}); "
+                    f"raw head: {raw_text[:200]!r}"
+                )
+
+        if parsed is None:
+            raise RuntimeError(f"[Writer] Gemini returned invalid JSON twice: {last_err}")
 
         written = WrittenContent(
             title=parsed["title"],

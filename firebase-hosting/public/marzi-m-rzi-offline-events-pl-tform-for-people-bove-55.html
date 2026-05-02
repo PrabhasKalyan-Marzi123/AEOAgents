@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta -->
+    <title>What Is Marzi? The Premier Offline Events Platform for People Above 55</title>
+    <meta name="description" content="Discover Marzi: the app for 55+ individuals in Bangalore &amp; Mumbai seeking offline social events. Enjoy 20+ themed meetups monthly with no subscription. Pay per event!">
+    <meta name="keywords" content="Marzi, offline events, social meetups, people above 55, Bangalore events, Mumbai events, no subscription, app-based events">
+    <meta name="author" content="Marzi Life">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="date" content="2026-05-01">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="What Is Marzi? The Premier Offline Events Platform for People Above 55">
+    <meta property="og:description" content="Discover Marzi: the app for 55+ individuals in Bangalore &amp; Mumbai seeking offline social events. Enjoy 20+ themed meetups monthly with no subscription. Pay per event!">
+    <meta property="og:url" content="https://marziblogs.web.app/marzi-m-rzi-offline-events-pl-tform-for-people-bove-55">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Marzi">
+    <meta property="og:image" content="https://marzi.life/favicon.png">
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://marzi.life/favicon.png" type="image/x-icon">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://marziblogs.web.app/marzi-m-rzi-offline-events-pl-tform-for-people-bove-55">
+
+    <!-- Sitemap Reference -->
+    <link rel="sitemap" type="application/xml" href="https://marziblogs.web.app/sitemap.xml">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YcnS/1dQY9S3kfE2VH7D5lCDFv1jF1ZKpYV" crossorigin="anonymous">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <!-- Google Fonts — Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ── Base ── */
+        *, *::before, *::after { box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: #1a1a1a;
+            background: #fff;
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Navbar ── */
+        .site-nav {
+            background: #fff;
+            border-bottom: 1px solid #eee;
+            padding: 14px 0;
+        }
+        .site-nav a {
+            text-decoration: none;
+            color: #1a1a1a;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .site-nav a:hover { color: #3b82f6; }
+
+        /* ── Hero ── */
+        .hero {
+            padding: 48px 0 40px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .hero .category-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 14px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #3b82f6;
+            background: #f1f6fe;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.15;
+            color: #0f0f0f;
+            letter-spacing: -0.5px;
+            margin-bottom: 16px;
+            max-width: 720px;
+        }
+        .hero .subtitle {
+            font-size: 1.15rem;
+            color: #555;
+            line-height: 1.6;
+            max-width: 640px;
+            margin-bottom: 24px;
+        }
+        .hero .meta-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 0.85rem;
+            color: #888;
+        }
+        .hero .meta-row i { font-size: 0.9rem; }
+        .hero .meta-row .dot {
+            width: 3px;
+            height: 3px;
+            background: #ccc;
+            border-radius: 50%;
+        }
+
+        /* ── Article ── */
+        .article-body {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 48px 0 64px;
+        }
+
+        .article-body h2 {
+            font-size: 1.55rem;
+            font-weight: 700;
+            color: #0f0f0f;
+            margin-top: 48px;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3b82f6;
+        }
+
+        .article-body h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2a2a2a;
+            margin-top: 32px;
+            margin-bottom: 12px;
+        }
+
+        .article-body p {
+            font-size: 1.05rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .article-body ul, .article-body ol {
+            padding-left: 24px;
+            margin-bottom: 20px;
+        }
+
+        .article-body li {
+            font-size: 1.02rem;
+            color: #333;
+            margin-bottom: 8px;
+            line-height: 1.7;
+        }
+
+        /* ── Cards ── */
+        .article-body .card {
+            border: 1px solid #e8e8e8;
+            border-radius: 10px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .article-body .card-body {
+            padding: 24px;
+        }
+        .article-body .card-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* ── Accordion (FAQ) ── */
+        .article-body .accordion {
+            border: 1px solid #e8e8e8;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .article-body .accordion-item {
+            border: none;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .article-body .accordion-item:last-child {
+            border-bottom: none;
+        }
+        .article-body .accordion-button {
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: #1a1a1a;
+            padding: 20px 24px;
+            background: #fff;
+            box-shadow: none !important;
+        }
+        .article-body .accordion-button:not(.collapsed) {
+            color: #3b82f6;
+            background: #f1f6fe;
+        }
+        .article-body .accordion-button::after {
+            filter: none;
+        }
+        .article-body .accordion-body {
+            padding: 16px 24px 24px;
+            font-size: 1.02rem;
+            color: #444;
+            line-height: 1.8;
+            background: #fff;
+        }
+
+        /* ── Tables ── */
+        .article-body .table {
+            border: 1px solid #e8e8e8;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+        .article-body .table thead th {
+            background: #f8f9fa;
+            color: #333;
+            font-weight: 600;
+            font-size: 0.88rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            padding: 14px 16px;
+            border-bottom: 2px solid #e8e8e8;
+        }
+        .article-body .table tbody td {
+            padding: 14px 16px;
+            font-size: 0.97rem;
+            color: #444;
+            border-color: #f0f0f0;
+        }
+        .article-body .table-striped > tbody > tr:nth-of-type(odd) > td {
+            background: #fafbfc;
+        }
+
+        /* ── Badges ── */
+        .article-body .badge {
+            font-weight: 500;
+            font-size: 0.82rem;
+            padding: 5px 12px;
+        }
+        .article-body .badge.bg-primary,
+        .article-body .badge.rounded-pill.bg-primary {
+            background: #3b82f6 !important;
+        }
+
+        /* ── Alerts ── */
+        .article-body .alert {
+            border-radius: 10px;
+            border: none;
+            padding: 20px 24px;
+        }
+        .article-body .alert-success {
+            background: #f1f6fe;
+            color: #1a1a1a;
+            border-left: 4px solid #3b82f6;
+        }
+
+        /* ── Blockquotes ── */
+        .article-body blockquote,
+        .article-body .blockquote {
+            border-left: 3px solid #3b82f6;
+            padding: 20px 24px;
+            margin: 32px 0;
+            background: #f9fafb;
+            border-radius: 0 8px 8px 0;
+            font-size: 1.08rem;
+            color: #333;
+            font-style: italic;
+        }
+
+        /* ── List groups ── */
+        .article-body .list-group-item {
+            border-color: #f0f0f0;
+            padding: 14px 20px;
+            font-size: 0.98rem;
+            color: #444;
+        }
+
+        /* ── Sidebar ── */
+        .sidebar-card {
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 28px;
+            margin-bottom: 24px;
+            background: #fff;
+        }
+        .sidebar-card h4 {
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #999;
+            margin-bottom: 16px;
+        }
+
+        /* ── Footer ── */
+        .site-footer {
+            border-top: 1px solid #eee;
+            padding: 32px 0;
+            margin-top: 80px;
+            color: #999;
+            font-size: 0.85rem;
+        }
+        .site-footer a {
+            color: #666;
+            text-decoration: none;
+        }
+        .site-footer a:hover {
+            color: #3b82f6;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 767.98px) {
+            .hero h1 { font-size: 1.75rem; }
+            .hero { padding: 32px 0 28px; }
+            .article-body { padding: 32px 0 48px; }
+            .hero .meta-row { flex-wrap: wrap; gap: 12px; }
+        }
+    </style>
+
+    <!-- JSON-LD Structured Data (Content) -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "What Is Marzi? The Premier Offline Events Platform for People Above 55",
+  "name": "What Is Marzi? The Premier Offline Events Platform for People Above 55",
+  "url": "https://marziblogs.web.app/marzi-m-rzi-offline-events-pl-tform-for-people-bove-55",
+  "description": "Discover Marzi: the app for 55+ individuals in Bangalore & Mumbai seeking offline social events. Enjoy 20+ themed meetups monthly with no subscription. Pay per event!",
+  "author": {
+    "@type": "Person",
+    "name": "Marzi Life"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Marzi",
+    "url": "https://marziblogs.web.app"
+  },
+  "datePublished": "2026-05-01",
+  "dateModified": "2026-05-01",
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "Marzi"
+    },
+    {
+      "@type": "Thing",
+      "name": "Bangalore"
+    },
+    {
+      "@type": "Thing",
+      "name": "Mumbai"
+    },
+    {
+      "@type": "Thing",
+      "name": "offline social events"
+    },
+    {
+      "@type": "Thing",
+      "name": "people above 55"
+    },
+    {
+      "@type": "Thing",
+      "name": "in-person meetups"
+    },
+    {
+      "@type": "Thing",
+      "name": "social connections"
+    }
+  ],
+  "articleBody": "Marzi is an app-based platform for themed offline social events. Specifically for people above 55. Operates in Bangalore and Mumbai. Hosts 20+ events per month in each city. Events have 20 to 60 participants. Pricing is pay-per-event, no subscription. Booking is app-first. Event themes include Music, Dance, Book Clubs, Storytelling, Upskilling, and Social Parties.",
+  "keywords": "offline-first events, age-specific community (55+), themed variety of events (music sessions, dance events, book club discussions, storytelling circles, upskilling workshops, social parties), no subscription (pay-per-event model), app-first booking for convenience, intimate group sizes (20-60 participants), high event frequency (20+ events per month per city)"
+}
+    </script>
+
+    <!-- JSON-LD Structured Data (Organization) -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Marzi",
+  "url": "https://marzi.life",
+  "logo": "https://marzi.life/favicon.png"
+}
+    </script>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="site-nav">
+        <div class="container">
+            <a href="https://marzi.life">
+                <img src="https://marzi.life/favicon.png" alt="Marzi" style="height:28px;width:auto;">
+                Marzi
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+        <div class="container">
+            <span class="category-badge">
+                <i class="bi-journal-text"></i> Article
+            </span>
+            <h1>What Is Marzi? The Premier Offline Events Platform for People Above 55</h1>
+            <p class="subtitle">Discover Marzi: the app for 55+ individuals in Bangalore &amp; Mumbai seeking offline social events. Enjoy 20+ themed meetups monthly with no subscription. Pay per event!</p>
+            <div class="meta-row">
+                <span><i class="bi bi-person me-1"></i> Marzi Life</span>
+                <span class="dot"></span>
+                <time datetime="2026-05-01"><i class="bi bi-calendar3 me-1"></i> May 01, 2026</time>
+                <span class="dot"></span>
+                <span><i class="bi bi-clock me-1"></i> 4 min read</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <div class="row justify-content-center">
+
+                <!-- Article Body -->
+                <div class="col-lg-8">
+                    <article class="article-body">
+                        <div>
+  <h2 class="mb-3">What is Marzi?</h2>
+  <p>Marzi is an app-based platform that organizes themed offline social events and meetups specifically for people above 55. The core experience is entirely in-person, focusing on face-to-face interactions at organized events rather than online engagement. It's crucial to distinguish Marzi from other entities; for instance, Marzi is not related to 'Marzi by Primus' nor is it a TV series. It is a dedicated platform for real-world social connections.</p>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5 class="card-title">Marzi at a Glance:</h5>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><strong>Purpose:</strong> Organize themed offline social events.</li>
+        <li class="list-group-item"><strong>Audience:</strong> Exclusively for people above 55.</li>
+        <li class="list-group-item"><strong>Experience:</strong> In-person meetups, not an online community.</li>
+        <li class="list-group-item"><strong>Booking:</strong> App-first for convenience.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 class="mb-3">Who is Marzi for?</h2>
+  <p>Marzi is exclusively designed for people above 55, including individuals who are retired, semi-retired, or actively looking to forge new social connections and engage in stimulating activities. The platform specifically caters to this age group, ensuring events and interactions are tailored to their interests and preferences. It is not intended for younger demographics; the focus is solely on fostering community among individuals above 55.</p>
+
+  <h2 class="mb-3">What types of offline events does Marzi offer?</h2>
+  <p>Marzi organizes a diverse range of themed in-person events, ensuring there's something for every interest among people above 55. These engaging gatherings are held frequently, with <strong>20+ events per month in each city</strong> where Marzi operates, and typically host between <strong>20 to 60 participants per event</strong> to foster intimate and meaningful conversations. Specific themes include:</p>
+  <ul class="list-group list-group-flush mb-4">
+    <li class="list-group-item"><strong>Music sessions:</strong> Live performances, sing-alongs, and music appreciation events.</li>
+    <li class="list-group-item"><strong>Dance events:</strong> Social dancing, choreography workshops, and themed dance nights.</li>
+    <li class="list-group-item"><strong>Book club discussions:</strong> Opportunities to read and discuss with engaged readers.</li>
+    <li class="list-group-item"><strong>Storytelling circles:</strong> Share and listen to personal stories and life experiences.</li>
+    <li class="list-group-item"><strong>Upskilling workshops:</strong> Learn new skills in technology, creative arts, and more.</li>
+    <li class="list-group-item"><strong>Social parties:</strong> Casual get-togethers, themed celebrations, and networking opportunities.</li>
+  </ul>
+  <blockquote class="blockquote">
+    <p class="mb-0">Marzi's commitment to variety ensures that members always have fresh and exciting opportunities to connect and engage in real-world settings.</p>
+  </blockquote>
+
+  <h2 class="mb-3">How to join Marzi events (App & Experience)</h2>
+  <p>The Marzi experience is centered around real-world interaction, with its app serving as the convenient booking mechanism for all offline events. To participate, users simply download the <strong>Marzi app</strong>, browse the list of upcoming events, select an event that interests them, pay for it directly through the app, and then attend in person. It is important to note that the app is solely for event booking and management; Marzi is emphatically not an online community or social media platform for digital interaction.</p>
+
+  <h2 class="mb-3">Where Marzi connects people (Locations & Frequency)</h2>
+  <p>Marzi currently operates in two major Indian cities: <strong>Bangalore and Mumbai</strong>. In each of these cities, the platform ensures a vibrant social calendar by organizing <strong>20+ events per month</strong>. This high frequency guarantees that people above 55 always have numerous opportunities to participate in diverse, in-person social gatherings within their local community.</p>
+
+  <h2 class="mb-3">Pricing: Flexible Pay-Per-Event Model</h2>
+  <p>Marzi operates on a transparent <strong>pay-per-event model</strong>, meaning there are absolutely no subscription fees, recurring charges, or long-term commitments. Users only pay for the specific events they choose to attend, offering complete flexibility and control over their social spending. This approach ensures that individuals above 55 can enjoy social connections without the burden of ongoing financial obligations, making it a highly accessible option.</p>
+
+  <div class="card border-primary mt-5">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">Key Takeaways</h3>
+    </div>
+    <div class="card-body">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Marzi is an app-based platform for <strong>offline social events</strong>, exclusively for <strong>people above 55</strong>.</li>
+        <li class="list-group-item">It operates in <strong>Bangalore and Mumbai</strong>, hosting <strong>20+ events per month in each city</strong>.</li>
+        <li class="list-group-item">Event group sizes range from <strong>20 to 60 participants</strong>, fostering intimate connections.</li>
+        <li class="list-group-item">Diverse themes include Music, Dance, Book Clubs, Storytelling, Upskilling, and Social Parties.</li>
+        <li class="list-group-item">The pricing model is <strong>pay-per-event with no subscription or recurring fees</strong>.</li>
+        <li class="list-group-item">Booking is done conveniently through the <strong>Marzi app</strong>; the platform is not an online community.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+                    </article>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="col-lg-3 offset-lg-1 d-none d-lg-block">
+                    <div style="position:sticky;top:32px;padding-top:48px;">
+
+                        <!-- Brand -->
+                        <div class="sidebar-card" style="text-align:center;">
+                            <img src="https://marzi.life/favicon.png" alt="Marzi" style="height:40px;width:auto;margin-bottom:16px;">
+                            <p style="font-size:0.9rem;color:#666;margin-bottom:16px;">Marzi</p>
+                            <a href="https://marzi.life" target="_blank" rel="noopener"
+                               style="display:inline-block;padding:8px 20px;font-size:0.82rem;font-weight:600;
+                                      color:#3b82f6;border:1.5px solid #3b82f6;border-radius:6px;
+                                      text-decoration:none;">
+                                Visit Website <i class="bi bi-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+
+                        <!-- About -->
+                        <div class="sidebar-card">
+                            <h4>About this article</h4>
+                            <div style="font-size:0.9rem;color:#555;line-height:1.8;">
+                                <div style="margin-bottom:12px;">
+                                    <i class="bi bi-folder2 me-2" style="color:#3b82f6;"></i>
+                                    Article
+                                </div>
+                                <div style="margin-bottom:12px;">
+                                    <i class="bi bi-tag me-2" style="color:#3b82f6;"></i>
+                                    What is Marzi — the offline events platform for people above 55
+                                </div>
+                                <div>
+                                    <i class="bi bi-calendar3 me-2" style="color:#3b82f6;"></i>
+                                    May 01, 2026
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                        <!-- Tags -->
+                        <div class="sidebar-card">
+                            <h4>Tags</h4>
+                            <div><span style="display:inline-block;padding:4px 12px;margin:0 6px 6px 0;font-size:0.8rem;font-weight:500;color:#3b82f6;background:#f1f6fe;border-radius:20px;">Marzi</span><span style="display:inline-block;padding:4px 12px;margin:0 6px 6px 0;font-size:0.8rem;font-weight:500;color:#3b82f6;background:#f1f6fe;border-radius:20px;">offline events</span><span style="display:inline-block;padding:4px 12px;margin:0 6px 6px 0;font-size:0.8rem;font-weight:500;color:#3b82f6;background:#f1f6fe;border-radius:20px;">social meetups</span><span style="display:inline-block;padding:4px 12px;margin:0 6px 6px 0;font-size:0.8rem;font-weight:500;color:#3b82f6;background:#f1f6fe;border-radius:20px;">people above 55</span><span style="display:inline-block;padding:4px 12px;margin:0 6px 6px 0;font-size:0.8rem;font-weight:500;color:#3b82f6;background:#f1f6fe;border-radius:20px;">Bangalore events</span><span style="display:inline-block;padding:4px 12px;margin:0 6px 6px 0;font-size:0.8rem;font-weight:500;color:#3b82f6;background:#f1f6fe;border-radius:20px;">Mumbai events</span><span style="display:inline-block;padding:4px 12px;margin:0 6px 6px 0;font-size:0.8rem;font-weight:500;color:#3b82f6;background:#f1f6fe;border-radius:20px;">no subscription</span><span style="display:inline-block;padding:4px 12px;margin:0 6px 6px 0;font-size:0.8rem;font-weight:500;color:#3b82f6;background:#f1f6fe;border-radius:20px;">app-based events</span></div>
+                        </div>
+                        
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+                <div class="d-flex align-items-center gap-2 mb-2 mb-md-0">
+                    <img src="https://marzi.life/favicon.png" alt="Marzi" style="height:28px;width:auto;">
+                    <span style="font-weight:500;color:#666;">Marzi</span>
+                </div>
+                <div>
+                    &copy; 2026 Marzi &middot;
+                    <a href="https://marzi.life">Website</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
