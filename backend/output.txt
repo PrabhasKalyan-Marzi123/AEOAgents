@@ -1,24 +1,24 @@
-12:27:30 [app.agents.pipeline] INFO: ============================================================
-12:27:30 [app.agents.pipeline] INFO: AEO Pipeline: 4 topics, brand=https://marzi.life
-12:27:30 [app.agents.pipeline] INFO: ============================================================
-12:27:30 [app.agents.pipeline] INFO: 
+12:54:35 [app.agents.pipeline] INFO: ============================================================
+12:54:35 [app.agents.pipeline] INFO: AEO Pipeline: 4 topics, brand=https://marzi.life
+12:54:35 [app.agents.pipeline] INFO: ============================================================
+12:54:35 [app.agents.pipeline] INFO: 
 --- Topic 1/4: offline social events for people above 55 in Bangalore ---
-12:27:30 [app.agents.pipeline] INFO: [Pipeline] Agent 1: Researching...
-12:27:30 [app.agents.researcher] INFO: [Researcher] Starting research: topic='offline social events for people above 55 in Bangalore' brand='https://marzi.life'
-12:27:31 [httpx] INFO: HTTP Request: GET https://marzi.life "HTTP/1.1 200 OK"
-12:27:31 [httpx] INFO: HTTP Request: GET https://marzi.life/assets/index-DFcUnJ6n.css "HTTP/1.1 200 OK"
-12:27:31 [app.agents.researcher] INFO: [Researcher] Scraped brand: Marzi
-12:27:31 [app.agents.researcher] INFO: [Researcher] Curated brand context loaded
-12:27:40 [httpx] INFO: HTTP Request: GET https://serpapi.com/search.json?q=offline+social+events+for+people+above+55+in+Bangalore&api_key=88e9df8bf5192113827878d7de00a1f19f57e04ff7d49e944acdd7d9a9f4a653&engine=google&num=10&gl=in&hl=en "HTTP/1.1 200 OK"
-12:27:42 [httpx] INFO: HTTP Request: GET https://serpapi.com/search.json?q=Marzi+offline+social+events+for+people+above+55+in+Bangalore&api_key=88e9df8bf5192113827878d7de00a1f19f57e04ff7d49e944acdd7d9a9f4a653&engine=google&num=10&gl=in&hl=en "HTTP/1.1 200 OK"
-12:27:42 [app.agents.researcher] INFO: [Researcher] SERP: 18 organic, 7 PAA, 8 related, answer_box=no
-12:27:42 [google_genai.models] INFO: AFC is enabled with max remote calls: 10.
-12:27:56 [httpx] INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-12:27:56 [app.agents.researcher] INFO: [Researcher] LLM analysis: intent=informational (confidence=0.8) — The SERP is dominated by pages listing or describing various clubs, communities, and activities for seniors in Bangalore, focusing on general discovery.
-12:27:56 [app.agents.researcher] INFO: [Researcher] Gap analysis: 6 gaps, 6 angles, 6 competitor topics covered
-12:27:56 [app.agents.pipeline] INFO: [Researcher] Result:
+12:54:35 [app.agents.pipeline] INFO: [Pipeline] Agent 1: Researching...
+12:54:35 [app.agents.researcher] INFO: [Researcher] Starting research: topic='offline social events for people above 55 in Bangalore' brand='https://marzi.life'
+12:54:35 [httpx] INFO: HTTP Request: GET https://marzi.life "HTTP/1.1 200 OK"
+12:54:35 [httpx] INFO: HTTP Request: GET https://marzi.life/assets/index-DFcUnJ6n.css "HTTP/1.1 200 OK"
+12:54:35 [app.agents.researcher] INFO: [Researcher] Scraped brand: Marzi
+12:54:35 [app.agents.researcher] INFO: [Researcher] Curated brand context loaded
+12:54:36 [httpx] INFO: HTTP Request: GET https://serpapi.com/search.json?q=offline+social+events+for+people+above+55+in+Bangalore&api_key=88e9df8bf5192113827878d7de00a1f19f57e04ff7d49e944acdd7d9a9f4a653&engine=google&num=10&gl=in&hl=en "HTTP/1.1 200 OK"
+12:54:36 [httpx] INFO: HTTP Request: GET https://serpapi.com/search.json?q=Marzi+offline+social+events+for+people+above+55+in+Bangalore&api_key=88e9df8bf5192113827878d7de00a1f19f57e04ff7d49e944acdd7d9a9f4a653&engine=google&num=10&gl=in&hl=en "HTTP/1.1 200 OK"
+12:54:36 [app.agents.researcher] INFO: [Researcher] SERP: 18 organic, 7 PAA, 8 related, answer_box=no
+12:54:36 [google_genai.models] INFO: AFC is enabled with max remote calls: 10.
+12:54:53 [httpx] INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+12:54:53 [app.agents.researcher] INFO: [Researcher] LLM analysis: intent=informational (confidence=0.8) — The SERP primarily lists various clubs, communities, and platforms offering social activities for seniors in Bangalore.
+12:54:53 [app.agents.researcher] INFO: [Researcher] Gap analysis: 6 gaps, 6 angles, 6 competitor topics covered
+12:54:53 [app.agents.pipeline] INFO: [Researcher] Result:
   brand: Marzi
-  serp_intent: informational (confidence=0.8, signals={'reasoning': 'The SERP is dominated by pages listing or describing various clubs, communities, and activities for seniors in Bangalore, focusing on general discovery.'})
+  serp_intent: informational (confidence=0.8, signals={'reasoning': 'The SERP primarily lists various clubs, communities, and platforms offering social activities for seniors in Bangalore.'})
   organic_results: 18 | paa: 7 | related: 8 | answer_box: no
   people_also_ask:
     • Where can senior citizens go in Bangalore?
@@ -28,43 +28,43 @@
     • How to make friends in Bangalore for free?
     • … (+2 more)
   competitor_topics_covered:
-    • General senior citizen communities and clubs in Bangalore
-    • Listings of diverse activities (yoga, arts, fitness, cultural)
-    • Platforms for finding both online and offline senior events
-    • Social groups and opportunities for making friends
-    • Wellness and active lifestyle programs for seniors
+    • General senior social clubs/communities in Bangalore
+    • Listings of diverse activities (wellness, cultural, educational)
+    • Platforms offering both online and offline events
+    • Opportunities for social interaction for people above 55
+    • Directory-style listings of senior recreation providers
     • … (+1 more)
   gaps:
-    • Lack of specific event frequency (e.g., 20+ events/month) in Bangalore.
-    • Absence of details on ideal group sizes for social interaction (e.g., 20-60 people).
-    • Pricing models are unclear; no mention of a pay-per-event, no-subscription option.
-    • Distinction between purely offline vs. mixed online/offline events is often blurred.
-    • Detailed breakdown of specific, diverse event themes (music, dance, storytelling, upskilling).
+    • Lack of specific event frequency (e.g., '20+ events per month')
+    • Absence of detail on optimal group sizes for social events (e.g., 20-60 people)
+    • No clear 'pay-per-event' pricing model without subscription or commitment
+    • Failure to emphasize a truly 'offline-only' social experience, free from online components
+    • Missing specific examples of diverse, recurring themed events (e.g., storytelling, specific upskilling)
     • … (+1 more)
   unique_angles:
-    • 20+ exclusively offline social events monthly in Bangalore.
-    • Pay-per-event, no subscription: only pay for what you attend.
-    • Intimate group sizes of 20-60 for genuine, face-to-face connections.
-    • Diverse themed events: music, dance, books, storytelling, upskilling, parties.
-    • Seamless app-based booking for all Bangalore events.
+    • 20+ unique offline social events monthly in Bangalore
+    • Pay-per-event, no subscription or commitment for senior meetups
+    • Curated in-person gatherings for 20-60 people, exclusively 55+
+    • Diverse themes: music, dance, book clubs, storytelling, upskilling, social parties
+    • App-first booking for seamless access to Bangalore's 55+ social scene
     • … (+1 more)
-  suggested_title: Unlock 20+ Monthly Offline Social Events for Bangalore Seniors (55+): No Subscription, Just Fun!
-12:27:56 [app.agents.pipeline] INFO: [Pipeline] Agent 2: Strategizing...
-12:27:56 [app.agents.strategist] INFO: [Strategist] Planning content for topic='offline social events for people above 55 in Bangalore'
-12:27:56 [app.agents.strategist] INFO: [Strategist] SERP-derived category: informational (intent=informational, confidence=0.8)
-12:27:56 [app.agents.strategist] INFO: [Strategist] Slug='marzi-offline-social-events-for-people-above-55-in-bangalore'
-12:27:56 [app.agents.strategist] INFO: [Strategist] Blueprint: category=informational, 9 sections, 13 facts, 6 angles, 6 competitor topics
-12:27:56 [app.agents.pipeline] INFO: [Strategist] Result:
+  suggested_title: Discover 20+ monthly offline events for 55+ in Bangalore: Pay-per-event, no subscription.
+12:54:53 [app.agents.pipeline] INFO: [Pipeline] Agent 2: Strategizing...
+12:54:53 [app.agents.strategist] INFO: [Strategist] Planning content for topic='offline social events for people above 55 in Bangalore'
+12:54:53 [app.agents.strategist] INFO: [Strategist] SERP-derived category: informational (intent=informational, confidence=0.8)
+12:54:53 [app.agents.strategist] INFO: [Strategist] Slug='marzi-offline-social-events-for-people-above-55-in-bangalore'
+12:54:53 [app.agents.strategist] INFO: [Strategist] Blueprint: category=informational, 9 sections, 13 facts, 6 angles, 6 competitor topics
+12:54:53 [app.agents.pipeline] INFO: [Strategist] Result:
   category: informational | schema: BlogPosting
   slug: marzi-offline-social-events-for-people-above-55-in-bangalore
-  title_direction: Unlock 20+ Monthly Offline Social Events for Bangalore Seniors (55+): No Subscription, Just Fun!
+  title_direction: Discover 20+ monthly offline events for 55+ in Bangalore: Pay-per-event, no subscription.
   primary_entity: Marzi | related: ['Bangalore', 'Mumbai']
   section_outline (9):
-    • The short answer: 20+ exclusively offline social events monthly in Bangalore.
+    • The short answer: 20+ unique offline social events monthly in Bangalore
     • What 'offline social events for people above 55 in Bangalore' actually means right now
-    • What most sources miss: Lack of specific event frequency (e.g., 20+ events/month) in Bangalore.
-    • What most sources miss: Absence of details on ideal group sizes for social interaction (e.g., 20-60 people).
-    • What most sources miss: Pricing models are unclear; no mention of a pay-per-event, no-subscription option.
+    • What most sources miss: Lack of specific event frequency (e.g., '20+ events per month')
+    • What most sources miss: Absence of detail on optimal group sizes for social events (e.g., 20-60 people)
+    • What most sources miss: No clear 'pay-per-event' pricing model without subscription or commitment
     • Where can senior citizens go in Bangalore?
     • How to meet friends as a senior citizen?
     • Where can I socialize in Bangalore?
@@ -80,50 +80,50 @@
     • Event theme: Music sessions (live performances, sing-alongs, music appreciation)
     • … (+5 more)
   information_gain_angles (6):
-    • 20+ exclusively offline social events monthly in Bangalore.
-    • Pay-per-event, no subscription: only pay for what you attend.
-    • Intimate group sizes of 20-60 for genuine, face-to-face connections.
-    • Diverse themed events: music, dance, books, storytelling, upskilling, parties.
-    • Seamless app-based booking for all Bangalore events.
+    • 20+ unique offline social events monthly in Bangalore
+    • Pay-per-event, no subscription or commitment for senior meetups
+    • Curated in-person gatherings for 20-60 people, exclusively 55+
+    • Diverse themes: music, dance, book clubs, storytelling, upskilling, social parties
+    • App-first booking for seamless access to Bangalore's 55+ social scene
     • … (+1 more)
-12:27:56 [app.agents.pipeline] INFO: [Pipeline] Agent 3: Writing...
-12:27:56 [app.agents.writer] INFO: [Writer] Generating content for slug='marzi-offline-social-events-for-people-above-55-in-bangalore'
-12:27:56 [google_genai.models] INFO: AFC is enabled with max remote calls: 10.
-12:28:19 [httpx] INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-12:28:19 [app.agents.writer] INFO: [Writer] Content generated: title='Marzi: Unlock 20+ Monthly Offline Social Events for Bangalore Seniors (55+)', 8 tags
-12:28:19 [app.agents.pipeline] INFO: [Writer] Result:
-  title: Marzi: Unlock 20+ Monthly Offline Social Events for Bangalore Seniors (55+)
+12:54:53 [app.agents.pipeline] INFO: [Pipeline] Agent 3: Writing...
+12:54:53 [app.agents.writer] INFO: [Writer] Generating content for slug='marzi-offline-social-events-for-people-above-55-in-bangalore'
+12:54:53 [google_genai.models] INFO: AFC is enabled with max remote calls: 10.
+12:55:26 [httpx] INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+12:55:26 [app.agents.writer] INFO: [Writer] Content generated: title='Marzi: Discover 20+ Monthly Offline Events for 55+ in Bangalore (Pay-Per-Event)', 8 tags
+12:55:26 [app.agents.pipeline] INFO: [Writer] Result:
+  title: Marzi: Discover 20+ Monthly Offline Events for 55+ in Bangalore (Pay-Per-Event)
   slug: marzi-offline-social-events-for-people-above-55-in-bangalore | category: informational
-  meta_description: Discover Marzi's 20+ monthly offline social events in Bangalore for people above 55. Enjoy themed meetups (20-60 participants) like music, dance, and book clubs. Pay per event, no subscription. Download the app!
-  tags: ['Marzi', 'Bangalore senior events', 'offline social events 55+', 'senior activities Bangalore', 'meetups for seniors Bangalore', 'no subscription events', '55+ social connections', 'themed events Bangalore']
-  html_length: 7481 chars
+  meta_description: Discover Marzi's 20+ monthly offline social events in Bangalore for people above 55. Enjoy themed in-person meetups (20-60 participants) with no subscription, pay-per-event.
+  tags: ['Marzi', 'offline social events Bangalore', '55+ activities Bangalore', 'senior citizens Bangalore', 'meetups for seniors', 'in-person events 55+', 'Bangalore social clubs', 'pay-per-event senior activities']
+  html_length: 9082 chars
   jsonld_specific_data keys: ['mentions', 'features', 'pricing', 'ratings', 'key_facts']
-12:28:19 [app.agents.pipeline] INFO: [Pipeline] Agent 4: Compiling...
-12:28:19 [app.agents.compiler] INFO: [Compiler] Compiling page: slug='marzi-offline-social-events-for-people-above-55-in-bangalore'
-12:28:19 [app.agents.compiler] INFO: [Compiler] JSON-LD generated: @type=BlogPosting
-12:28:19 [app.agents.compiler] INFO: [Compiler] Written: /Users/prabhaskalyan/AEOAgents/firebase-hosting/public/marzi-offline-social-events-for-people-above-55-in-bangalore.html (26833 bytes)
-12:28:19 [app.agents.pipeline] INFO: [Compiler] Result:
-  file: /Users/prabhaskalyan/AEOAgents/firebase-hosting/public/marzi-offline-social-events-for-people-above-55-in-bangalore.html (26833 bytes)
+12:55:26 [app.agents.pipeline] INFO: [Pipeline] Agent 4: Compiling...
+12:55:26 [app.agents.compiler] INFO: [Compiler] Compiling page: slug='marzi-offline-social-events-for-people-above-55-in-bangalore'
+12:55:26 [app.agents.compiler] INFO: [Compiler] JSON-LD generated: @type=BlogPosting
+12:55:26 [app.agents.compiler] INFO: [Compiler] Written: /Users/prabhaskalyan/AEOAgents/firebase-hosting/public/marzi-offline-social-events-for-people-above-55-in-bangalore.html (28849 bytes)
+12:55:26 [app.agents.pipeline] INFO: [Compiler] Result:
+  file: /Users/prabhaskalyan/AEOAgents/firebase-hosting/public/marzi-offline-social-events-for-people-above-55-in-bangalore.html (28849 bytes)
   jsonld @type: BlogPosting
-  category: informational | tags: ['Marzi', 'Bangalore senior events', 'offline social events 55+', 'senior activities Bangalore', 'meetups for seniors Bangalore', 'no subscription events', '55+ social connections', 'themed events Bangalore']
-12:28:19 [app.agents.pipeline] INFO: 
+  category: informational | tags: ['Marzi', 'offline social events Bangalore', '55+ activities Bangalore', 'senior citizens Bangalore', 'meetups for seniors', 'in-person events 55+', 'Bangalore social clubs', 'pay-per-event senior activities']
+12:55:26 [app.agents.pipeline] INFO: 
 --- Topic 2/4: how to find friends after retirement in India ---
-12:28:19 [app.agents.pipeline] INFO: [Pipeline] Agent 1: Researching...
-12:28:19 [app.agents.researcher] INFO: [Researcher] Starting research: topic='how to find friends after retirement in India' brand='https://marzi.life'
-12:28:19 [httpx] INFO: HTTP Request: GET https://marzi.life "HTTP/1.1 200 OK"
-12:28:19 [httpx] INFO: HTTP Request: GET https://marzi.life/assets/index-DFcUnJ6n.css "HTTP/1.1 200 OK"
-12:28:19 [app.agents.researcher] INFO: [Researcher] Scraped brand: Marzi
-12:28:19 [app.agents.researcher] INFO: [Researcher] Curated brand context loaded
-12:28:21 [httpx] INFO: HTTP Request: GET https://serpapi.com/search.json?q=how+to+find+friends+after+retirement+in+India&api_key=88e9df8bf5192113827878d7de00a1f19f57e04ff7d49e944acdd7d9a9f4a653&engine=google&num=10&gl=in&hl=en "HTTP/1.1 200 OK"
-12:28:25 [httpx] INFO: HTTP Request: GET https://serpapi.com/search.json?q=Marzi+how+to+find+friends+after+retirement+in+India&api_key=88e9df8bf5192113827878d7de00a1f19f57e04ff7d49e944acdd7d9a9f4a653&engine=google&num=10&gl=in&hl=en "HTTP/1.1 200 OK"
-12:28:25 [app.agents.researcher] INFO: [Researcher] SERP: 13 organic, 7 PAA, 16 related, answer_box=no
-12:28:25 [google_genai.models] INFO: AFC is enabled with max remote calls: 10.
-12:28:39 [httpx] INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-12:28:39 [app.agents.researcher] INFO: [Researcher] LLM analysis: intent=howto (confidence=0.8) — Most top results provide step-by-step advice, tips, or methods for seniors to find friends after retirement.
-12:28:39 [app.agents.researcher] INFO: [Researcher] Gap analysis: 6 gaps, 6 angles, 7 competitor topics covered
-12:28:39 [app.agents.pipeline] INFO: [Researcher] Result:
+12:55:26 [app.agents.pipeline] INFO: [Pipeline] Agent 1: Researching...
+12:55:26 [app.agents.researcher] INFO: [Researcher] Starting research: topic='how to find friends after retirement in India' brand='https://marzi.life'
+12:55:26 [httpx] INFO: HTTP Request: GET https://marzi.life "HTTP/1.1 200 OK"
+12:55:26 [httpx] INFO: HTTP Request: GET https://marzi.life/assets/index-DFcUnJ6n.css "HTTP/1.1 200 OK"
+12:55:26 [app.agents.researcher] INFO: [Researcher] Scraped brand: Marzi
+12:55:26 [app.agents.researcher] INFO: [Researcher] Curated brand context loaded
+12:55:27 [httpx] INFO: HTTP Request: GET https://serpapi.com/search.json?q=how+to+find+friends+after+retirement+in+India&api_key=88e9df8bf5192113827878d7de00a1f19f57e04ff7d49e944acdd7d9a9f4a653&engine=google&num=10&gl=in&hl=en "HTTP/1.1 200 OK"
+12:55:28 [httpx] INFO: HTTP Request: GET https://serpapi.com/search.json?q=Marzi+how+to+find+friends+after+retirement+in+India&api_key=88e9df8bf5192113827878d7de00a1f19f57e04ff7d49e944acdd7d9a9f4a653&engine=google&num=10&gl=in&hl=en "HTTP/1.1 200 OK"
+12:55:28 [app.agents.researcher] INFO: [Researcher] SERP: 13 organic, 7 PAA, 16 related, answer_box=no
+12:55:28 [google_genai.models] INFO: AFC is enabled with max remote calls: 10.
+12:55:44 [httpx] INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+12:55:44 [app.agents.researcher] INFO: [Researcher] LLM analysis: intent=howto (confidence=0.8) — The SERP is dominated by articles offering tips, methods, and step-by-step advice on finding friends after retirement.
+12:55:44 [app.agents.researcher] INFO: [Researcher] Gap analysis: 6 gaps, 6 angles, 7 competitor topics covered
+12:55:44 [app.agents.pipeline] INFO: [Researcher] Result:
   brand: Marzi
-  serp_intent: howto (confidence=0.8, signals={'reasoning': 'Most top results provide step-by-step advice, tips, or methods for seniors to find friends after retirement.'})
+  serp_intent: howto (confidence=0.8, signals={'reasoning': 'The SERP is dominated by articles offering tips, methods, and step-by-step advice on finding friends after retirement.'})
   organic_results: 13 | paa: 7 | related: 16 | answer_box: no
   people_also_ask:
     • What is the 11 6 3 rule of friendship?
@@ -133,36 +133,36 @@
     • Where is the best place for seniors to meet other seniors?
     • … (+2 more)
   competitor_topics_covered:
-    • General advice on joining clubs/groups (gym, yoga, hobbies)
-    • Senior living communities as a place to meet friends
-    • Online communities and friendship sites for seniors
-    • Tips for making new friends after 60/retirement
-    • Importance of social connection for seniors
+    • General advice on joining hobby clubs and groups
+    • Suggestions for senior living communities or retirement homes
+    • Online communities and senior friendship sites
+    • Attending religious or spiritual gatherings
+    • Pursuing continuing education
     • … (+2 more)
   gaps:
-    • Lack of platforms offering curated, themed offline events specifically for seniors.
-    • Absence of services emphasizing in-person, face-to-face interaction as a primary value, contrasting with online communities.
-    • No mention of the frequency and scale of senior-specific social events in major Indian cities like Bangalore and Mumbai.
-    • Information on flexible, pay-per-event models for senior social activities, avoiding subscriptions.
-    • Details on platforms facilitating diverse themed events (music, dance, storytelling, upskilling) for seniors.
+    • Lack of emphasis on exclusively offline, in-person social events as a primary solution.
+    • Specific, diverse themed event categories (e.g., music, dance, storytelling) are not detailed by competitors.
+    • Quantified event frequency (e.g., 20+ events/month) and ideal group sizes (20-60 participants) are missing.
+    • The 'no subscription, pay-per-event' pricing model is not discussed by competitors.
+    • Hyper-local focus on specific Indian cities (Bangalore, Mumbai) with high event density is absent.
     • … (+1 more)
   unique_angles:
-    • Marzi offers 20+ offline, themed events monthly in Bangalore and Mumbai, exclusively for 55+.
-    • Connect authentically in right-sized groups of 20-60 at Marzi's diverse in-person meetups.
-    • Enjoy social events without subscription fees – pay only for the music, dance, or book club events you choose.
-    • From music sessions to upskilling workshops, Marzi provides a unique variety of face-to-face experiences for seniors.
-    • Forget online communities; Marzi is 100% offline-first, fostering real connections in Bangalore and Mumbai.
+    • Marzi offers exclusively offline, face-to-face social events, not online communities.
+    • 20+ themed events per month in Bangalore and Mumbai, ensuring high frequency and local options.
+    • Diverse event themes: Music, Dance, Book Clubs, Storytelling, Upskilling, Social Parties.
+    • No subscription model: Pay only for the specific events you choose to attend.
+    • Events designed exclusively for people above 55, fostering age-specific connections.
     • … (+1 more)
-  suggested_title: Find 55+ Friends: 20+ Offline Themed Events Monthly in Bangalore & Mumbai
-12:28:39 [app.agents.pipeline] INFO: [Pipeline] Agent 2: Strategizing...
-12:28:39 [app.agents.strategist] INFO: [Strategist] Planning content for topic='how to find friends after retirement in India'
-12:28:39 [app.agents.strategist] INFO: [Strategist] SERP-derived category: how-to (intent=howto, confidence=0.8)
-12:28:39 [app.agents.strategist] INFO: [Strategist] Slug='marzi-find-friends-after-retirement-in-india'
-12:28:39 [app.agents.strategist] INFO: [Strategist] Blueprint: category=how-to, 10 sections, 13 facts, 6 angles, 7 competitor topics
-12:28:39 [app.agents.pipeline] INFO: [Strategist] Result:
+  suggested_title: Focus on Marzi's unique offline, high-frequency, themed events for 55+ in Bangalore & Mumbai.
+12:55:44 [app.agents.pipeline] INFO: [Pipeline] Agent 2: Strategizing...
+12:55:44 [app.agents.strategist] INFO: [Strategist] Planning content for topic='how to find friends after retirement in India'
+12:55:44 [app.agents.strategist] INFO: [Strategist] SERP-derived category: how-to (intent=howto, confidence=0.8)
+12:55:44 [app.agents.strategist] INFO: [Strategist] Slug='marzi-find-friends-after-retirement-in-india'
+12:55:44 [app.agents.strategist] INFO: [Strategist] Blueprint: category=how-to, 10 sections, 13 facts, 6 angles, 7 competitor topics
+12:55:44 [app.agents.pipeline] INFO: [Strategist] Result:
   category: how-to | schema: HowTo
   slug: marzi-find-friends-after-retirement-in-india
-  title_direction: Find 55+ Friends: 20+ Offline Themed Events Monthly in Bangalore & Mumbai
+  title_direction: Focus on Marzi's unique offline, high-frequency, themed events for 55+ in Bangalore & Mumbai.
   primary_entity: Marzi | related: ['Bangalore', 'Mumbai']
   section_outline (10):
     • Why this matters: the situation in Bangalore, Mumbai
@@ -170,11 +170,11 @@
     • Step 1: Find friends after retirement
     • Step 2: How do 70 year olds make new friends
     • Step 3: Find friends for seniors
-    • Step 4: Marzi offers 20+ offline, themed events monthly in Bangalore and Mumbai,…
-    • Step 5: Connect authentically in right-sized groups of 20-60 at Marzi's diverse…
-    • Step 6: Enjoy social events without subscription fees – pay only for the music, dance,…
-    • Step 7: From music sessions to upskilling workshops, Marzi provides a unique variety…
-    • Step 8: Forget online communities; Marzi is 100% offline-first, fostering real…
+    • Step 4: Marzi offers exclusively offline, face-to-face social events, not online…
+    • Step 5: 20+ themed events per month in Bangalore and Mumbai, ensuring high frequency…
+    • Step 6: Diverse event themes: Music, Dance, Book Clubs, Storytelling, Upskilling,…
+    • Step 7: No subscription model: Pay only for the specific events you choose to attend
+    • Step 8: Events designed exclusively for people above 55, fostering age-specific…
   key_facts (13):
     • Marzi is an app-based platform that organizes themed offline social events and meetups specifically for people above 55. The core experience
     • Target audience: People above 55 (retired, semi-retired, or looking for social connections)
@@ -186,50 +186,53 @@
     • Event theme: Music sessions (live performances, sing-alongs, music appreciation)
     • … (+5 more)
   information_gain_angles (6):
-    • Marzi offers 20+ offline, themed events monthly in Bangalore and Mumbai, exclusively for 55+.
-    • Connect authentically in right-sized groups of 20-60 at Marzi's diverse in-person meetups.
-    • Enjoy social events without subscription fees – pay only for the music, dance, or book club events you choose.
-    • From music sessions to upskilling workshops, Marzi provides a unique variety of face-to-face experiences for seniors.
-    • Forget online communities; Marzi is 100% offline-first, fostering real connections in Bangalore and Mumbai.
+    • Marzi offers exclusively offline, face-to-face social events, not online communities.
+    • 20+ themed events per month in Bangalore and Mumbai, ensuring high frequency and local options.
+    • Diverse event themes: Music, Dance, Book Clubs, Storytelling, Upskilling, Social Parties.
+    • No subscription model: Pay only for the specific events you choose to attend.
+    • Events designed exclusively for people above 55, fostering age-specific connections.
     • … (+1 more)
-12:28:39 [app.agents.pipeline] INFO: [Pipeline] Agent 3: Writing...
-12:28:39 [app.agents.writer] INFO: [Writer] Generating content for slug='marzi-find-friends-after-retirement-in-india'
-12:28:39 [google_genai.models] INFO: AFC is enabled with max remote calls: 10.
-12:29:09 [httpx] INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-12:29:09 [app.agents.writer] INFO: [Writer] Content generated: title='Find 55+ Friends: 20+ Offline Themed Events Monthly with Marzi', 8 tags
-12:29:09 [app.agents.pipeline] INFO: [Writer] Result:
-  title: Find 55+ Friends: 20+ Offline Themed Events Monthly with Marzi
+12:55:44 [app.agents.pipeline] INFO: [Pipeline] Agent 3: Writing...
+12:55:44 [app.agents.writer] INFO: [Writer] Generating content for slug='marzi-find-friends-after-retirement-in-india'
+12:55:44 [google_genai.models] INFO: AFC is enabled with max remote calls: 10.
+12:56:04 [httpx] INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+12:56:04 [app.agents.writer] WARNING: [Writer] Attempt 1 JSON parse failed (Expecting ',' delimiter: line 3 column 2940 (char 3025)); raw head: '{\n  "title": "Finding Friends After Retirement in India: Marzi\'s 55+ Offline Events",\n  "html": "<div>\\n  <p class=\\"lead\\">Finding meaningful social connections after retirement can be a significant '
+12:56:04 [google_genai.models] INFO: AFC is enabled with max remote calls: 10.
+12:56:24 [httpx] INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+12:56:24 [app.agents.writer] INFO: [Writer] Content generated: title='Marzi: Find Friends After Retirement in Bangalore & Mumbai (55+ Offline Events)', 8 tags
+12:56:24 [app.agents.pipeline] INFO: [Writer] Result:
+  title: Marzi: Find Friends After Retirement in Bangalore & Mumbai (55+ Offline Events)
   slug: marzi-find-friends-after-retirement-in-india | category: how-to
-  meta_description: Discover how to find friends after retirement in Bangalore & Mumbai. Marzi offers 20+ unique offline, themed events monthly for people above 55, with no subscription.
-  tags: ['friends after retirement', 'senior social events', '55+ meetups India', 'offline community Bangalore', 'offline community Mumbai', 'Marzi app', 'social connections for seniors', 'retirement activities']
-  html_length: 7995 chars
+  meta_description: Marzi helps people above 55 in Bangalore & Mumbai find friends after retirement with 20+ unique offline social events monthly. No subscription, just pay-per-event.
+  tags: ['Marzi', 'friends after retirement', 'social events for seniors', '55+ activities Bangalore', '55+ activities Mumbai', 'offline meetups India', 'senior social clubs', 'making friends over 60']
+  html_length: 8727 chars
   jsonld_specific_data keys: ['mentions', 'features', 'pricing', 'ratings', 'key_facts']
-12:29:09 [app.agents.pipeline] INFO: [Pipeline] Agent 4: Compiling...
-12:29:09 [app.agents.compiler] INFO: [Compiler] Compiling page: slug='marzi-find-friends-after-retirement-in-india'
-12:29:09 [app.agents.compiler] INFO: [Compiler] JSON-LD generated: @type=HowTo
-12:29:09 [app.agents.compiler] INFO: [Compiler] Written: /Users/prabhaskalyan/AEOAgents/firebase-hosting/public/marzi-find-friends-after-retirement-in-india.html (31928 bytes)
-12:29:09 [app.agents.pipeline] INFO: [Compiler] Result:
-  file: /Users/prabhaskalyan/AEOAgents/firebase-hosting/public/marzi-find-friends-after-retirement-in-india.html (31928 bytes)
+12:56:24 [app.agents.pipeline] INFO: [Pipeline] Agent 4: Compiling...
+12:56:24 [app.agents.compiler] INFO: [Compiler] Compiling page: slug='marzi-find-friends-after-retirement-in-india'
+12:56:24 [app.agents.compiler] INFO: [Compiler] JSON-LD generated: @type=HowTo
+12:56:24 [app.agents.compiler] INFO: [Compiler] Written: /Users/prabhaskalyan/AEOAgents/firebase-hosting/public/marzi-find-friends-after-retirement-in-india.html (33137 bytes)
+12:56:24 [app.agents.pipeline] INFO: [Compiler] Result:
+  file: /Users/prabhaskalyan/AEOAgents/firebase-hosting/public/marzi-find-friends-after-retirement-in-india.html (33137 bytes)
   jsonld @type: HowTo
-  category: how-to | tags: ['friends after retirement', 'senior social events', '55+ meetups India', 'offline community Bangalore', 'offline community Mumbai', 'Marzi app', 'social connections for seniors', 'retirement activities']
-12:29:09 [app.agents.pipeline] INFO: 
+  category: how-to | tags: ['Marzi', 'friends after retirement', 'social events for seniors', '55+ activities Bangalore', '55+ activities Mumbai', 'offline meetups India', 'senior social clubs', 'making friends over 60']
+12:56:24 [app.agents.pipeline] INFO: 
 --- Topic 3/4: best social platforms for people above 55 in Mumbai ---
-12:29:09 [app.agents.pipeline] INFO: [Pipeline] Agent 1: Researching...
-12:29:09 [app.agents.researcher] INFO: [Researcher] Starting research: topic='best social platforms for people above 55 in Mumbai' brand='https://marzi.life'
-12:29:09 [httpx] INFO: HTTP Request: GET https://marzi.life "HTTP/1.1 200 OK"
-12:29:09 [httpx] INFO: HTTP Request: GET https://marzi.life/assets/index-DFcUnJ6n.css "HTTP/1.1 200 OK"
-12:29:09 [app.agents.researcher] INFO: [Researcher] Scraped brand: Marzi
-12:29:09 [app.agents.researcher] INFO: [Researcher] Curated brand context loaded
-12:29:13 [httpx] INFO: HTTP Request: GET https://serpapi.com/search.json?q=best+social+platforms+for+people+above+55+in+Mumbai&api_key=88e9df8bf5192113827878d7de00a1f19f57e04ff7d49e944acdd7d9a9f4a653&engine=google&num=10&gl=in&hl=en "HTTP/1.1 200 OK"
-12:29:15 [httpx] INFO: HTTP Request: GET https://serpapi.com/search.json?q=Marzi+best+social+platforms+for+people+above+55+in+Mumbai&api_key=88e9df8bf5192113827878d7de00a1f19f57e04ff7d49e944acdd7d9a9f4a653&engine=google&num=10&gl=in&hl=en "HTTP/1.1 200 OK"
-12:29:15 [app.agents.researcher] INFO: [Researcher] SERP: 20 organic, 6 PAA, 16 related, answer_box=no
-12:29:15 [google_genai.models] INFO: AFC is enabled with max remote calls: 10.
-12:29:22 [httpx] INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-12:29:22 [app.agents.researcher] INFO: [Researcher] LLM analysis: intent=comparison (confidence=0.8) — The SERP is dominated by 'best' lists and roundups of social media apps and platforms for seniors.
-12:29:22 [app.agents.researcher] INFO: [Researcher] Gap analysis: 6 gaps, 6 angles, 5 competitor topics covered
-12:29:22 [app.agents.pipeline] INFO: [Researcher] Result:
+12:56:24 [app.agents.pipeline] INFO: [Pipeline] Agent 1: Researching...
+12:56:24 [app.agents.researcher] INFO: [Researcher] Starting research: topic='best social platforms for people above 55 in Mumbai' brand='https://marzi.life'
+12:56:25 [httpx] INFO: HTTP Request: GET https://marzi.life "HTTP/1.1 200 OK"
+12:56:25 [httpx] INFO: HTTP Request: GET https://marzi.life/assets/index-DFcUnJ6n.css "HTTP/1.1 200 OK"
+12:56:25 [app.agents.researcher] INFO: [Researcher] Scraped brand: Marzi
+12:56:25 [app.agents.researcher] INFO: [Researcher] Curated brand context loaded
+12:56:25 [httpx] INFO: HTTP Request: GET https://serpapi.com/search.json?q=best+social+platforms+for+people+above+55+in+Mumbai&api_key=88e9df8bf5192113827878d7de00a1f19f57e04ff7d49e944acdd7d9a9f4a653&engine=google&num=10&gl=in&hl=en "HTTP/1.1 200 OK"
+12:56:26 [httpx] INFO: HTTP Request: GET https://serpapi.com/search.json?q=Marzi+best+social+platforms+for+people+above+55+in+Mumbai&api_key=88e9df8bf5192113827878d7de00a1f19f57e04ff7d49e944acdd7d9a9f4a653&engine=google&num=10&gl=in&hl=en "HTTP/1.1 200 OK"
+12:56:26 [app.agents.researcher] INFO: [Researcher] SERP: 20 organic, 6 PAA, 16 related, answer_box=no
+12:56:26 [google_genai.models] INFO: AFC is enabled with max remote calls: 10.
+12:56:36 [httpx] INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+12:56:36 [app.agents.researcher] INFO: [Researcher] LLM analysis: intent=comparison (confidence=0.9) — The SERP is dominated by 'best apps' and 'social media for seniors' lists, comparing various online platforms.
+12:56:36 [app.agents.researcher] INFO: [Researcher] Gap analysis: 6 gaps, 6 angles, 5 competitor topics covered
+12:56:36 [app.agents.pipeline] INFO: [Researcher] Result:
   brand: Marzi
-  serp_intent: comparison (confidence=0.8, signals={'reasoning': "The SERP is dominated by 'best' lists and roundups of social media apps and platforms for seniors."})
+  serp_intent: comparison (confidence=0.9, signals={'reasoning': "The SERP is dominated by 'best apps' and 'social media for seniors' lists, comparing various online platforms."})
   organic_results: 20 | paa: 6 | related: 16 | answer_box: no
   people_also_ask:
     • What social media do over 50's use?
@@ -239,44 +242,44 @@
     • What is Marzi by Primus?
     • … (+1 more)
   competitor_topics_covered:
-    • Lists of popular social media apps (Facebook, YouTube, Instagram, WhatsApp)
-    • Dedicated social networking apps for seniors in India (Khyaal, Evergreen Club, Gen S Life)
-    • General benefits of online social connection for older adults
-    • Reviews and discussions about specific senior-focused apps
-    • Some mentions of general senior activities (games, travel, yoga, craft)
+    • Online social networking apps for seniors (Khyaal, Evergreen Club)
+    • Mainstream social media platforms for seniors (Facebook, YouTube, Instagram)
+    • Features of online senior apps (live sessions, games, digital assistance)
+    • General advice on choosing social media platforms for older adults
+    • Sharing photos, videos, and online community building
   gaps:
-    • Lack of focus on dedicated *offline* social events and meetups in Mumbai.
-    • Specific details on the frequency and variety of *in-person* social activities for seniors in Mumbai.
-    • Information on group sizes for local, face-to-face social gatherings.
-    • Alternative pricing models for social engagement beyond subscriptions (e.g., pay-per-event for offline activities).
-    • The unique value proposition of face-to-face interaction vs. purely online communities for seniors.
+    • Absence of in-person social event platforms specifically for seniors.
+    • Lack of options for curated, themed offline activities (music, dance, books, etc.).
+    • No discussion of event frequency or group sizes for local, face-to-face meetups.
+    • Missing information on pay-per-event models for social engagement (vs. subscriptions/free online).
+    • Specific local options for *offline* social connections in Mumbai for people above 55.
     • … (+1 more)
   unique_angles:
-    • Marzi offers 20+ unique *offline* events per month in Mumbai for people above 55.
-    • Marzi's events are exclusively in-person, fostering real-world connections, not online communities.
-    • Participants pay only for the events they attend, with no subscription or recurring fees.
-    • Events feature diverse themes like music, dance, book clubs, storytelling, and upskilling workshops.
-    • Marzi ensures an intimate group size of 20-60 participants for meaningful conversations.
+    • Marzi offers 20+ *offline* social events monthly in Mumbai for people above 55.
+    • Themed in-person events like music, dance, book clubs, and upskilling workshops.
+    • Pay-per-event model means no subscription or recurring fees for social activities.
+    • Events designed for intimate group sizes (20-60 participants) for real connections.
+    • Focus on face-to-face interaction, not online sharing or digital communities.
     • … (+1 more)
-  suggested_title: Highlight Marzi's unique offline, pay-per-event model for frequent, themed social gatherings in Mumbai.
-12:29:22 [app.agents.pipeline] INFO: [Pipeline] Agent 2: Strategizing...
-12:29:22 [app.agents.strategist] INFO: [Strategist] Planning content for topic='best social platforms for people above 55 in Mumbai'
-12:29:22 [app.agents.strategist] INFO: [Strategist] SERP-derived category: comparison (intent=comparison, confidence=0.8)
-12:29:22 [app.agents.strategist] INFO: [Strategist] Slug='marzi-best-social-platforms-for-people-above-55-in-mumbai'
-12:29:22 [app.agents.strategist] INFO: [Strategist] Blueprint: category=comparison, 9 sections, 13 facts, 6 angles, 5 competitor topics
-12:29:22 [app.agents.pipeline] INFO: [Strategist] Result:
+  suggested_title: Discover Mumbai's best *offline* social events for seniors: 20+ themed meetups monthly.
+12:56:36 [app.agents.pipeline] INFO: [Pipeline] Agent 2: Strategizing...
+12:56:36 [app.agents.strategist] INFO: [Strategist] Planning content for topic='best social platforms for people above 55 in Mumbai'
+12:56:36 [app.agents.strategist] INFO: [Strategist] SERP-derived category: comparison (intent=comparison, confidence=0.9)
+12:56:36 [app.agents.strategist] INFO: [Strategist] Slug='marzi-best-social-platforms-for-people-above-55-in-mumbai'
+12:56:36 [app.agents.strategist] INFO: [Strategist] Blueprint: category=comparison, 9 sections, 13 facts, 6 angles, 5 competitor topics
+12:56:36 [app.agents.pipeline] INFO: [Strategist] Result:
   category: comparison | schema: Article
   slug: marzi-best-social-platforms-for-people-above-55-in-mumbai
-  title_direction: Highlight Marzi's unique offline, pay-per-event model for frequent, themed social gatherings in Mumbai.
+  title_direction: Discover Mumbai's best *offline* social events for seniors: 20+ themed meetups monthly.
   primary_entity: Marzi | related: ['Bangalore', 'Mumbai']
   section_outline (9):
     • The current landscape: what users find when they search 'best social platforms for people above 55 in Mumbai'
     • Comparison criteria that actually matter
     • Side-by-side comparison table
     • How Marzi compares to Khyaal, Choosing the Best Platforms, Clarksville, TN
-    • Where alternatives fall short: Lack of focus on dedicated *offline* social events and meetups in Mumbai.
-    • Where alternatives fall short: Specific details on the frequency and variety of *in-person* social activities for…
-    • Where alternatives fall short: Information on group sizes for local, face-to-face social gatherings.
+    • Where alternatives fall short: Absence of in-person social event platforms specifically for seniors.
+    • Where alternatives fall short: Lack of options for curated, themed offline activities (music, dance, books, etc.).
+    • Where alternatives fall short: No discussion of event frequency or group sizes for local, face-to-face meetups.
     • Pros and cons of Marzi
     • Who each option is best for
   key_facts (13):
@@ -290,50 +293,50 @@
     • Event theme: Music sessions (live performances, sing-alongs, music appreciation)
     • … (+5 more)
   information_gain_angles (6):
-    • Marzi offers 20+ unique *offline* events per month in Mumbai for people above 55.
-    • Marzi's events are exclusively in-person, fostering real-world connections, not online communities.
-    • Participants pay only for the events they attend, with no subscription or recurring fees.
-    • Events feature diverse themes like music, dance, book clubs, storytelling, and upskilling workshops.
-    • Marzi ensures an intimate group size of 20-60 participants for meaningful conversations.
+    • Marzi offers 20+ *offline* social events monthly in Mumbai for people above 55.
+    • Themed in-person events like music, dance, book clubs, and upskilling workshops.
+    • Pay-per-event model means no subscription or recurring fees for social activities.
+    • Events designed for intimate group sizes (20-60 participants) for real connections.
+    • Focus on face-to-face interaction, not online sharing or digital communities.
     • … (+1 more)
-12:29:22 [app.agents.pipeline] INFO: [Pipeline] Agent 3: Writing...
-12:29:22 [app.agents.writer] INFO: [Writer] Generating content for slug='marzi-best-social-platforms-for-people-above-55-in-mumbai'
-12:29:23 [google_genai.models] INFO: AFC is enabled with max remote calls: 10.
-12:29:46 [httpx] INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-12:29:46 [app.agents.writer] INFO: [Writer] Content generated: title='Marzi: Best Offline Social Events for 55+ in Mumbai (No Subscription)', 8 tags
-12:29:46 [app.agents.pipeline] INFO: [Writer] Result:
-  title: Marzi: Best Offline Social Events for 55+ in Mumbai (No Subscription)
+12:56:36 [app.agents.pipeline] INFO: [Pipeline] Agent 3: Writing...
+12:56:36 [app.agents.writer] INFO: [Writer] Generating content for slug='marzi-best-social-platforms-for-people-above-55-in-mumbai'
+12:56:36 [google_genai.models] INFO: AFC is enabled with max remote calls: 10.
+12:57:05 [httpx] INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+12:57:05 [app.agents.writer] INFO: [Writer] Content generated: title='Marzi: Mumbai's Best Offline Social Events for 55+ with 20+ Monthly Meetups', 10 tags
+12:57:05 [app.agents.pipeline] INFO: [Writer] Result:
+  title: Marzi: Mumbai's Best Offline Social Events for 55+ with 20+ Monthly Meetups
   slug: marzi-best-social-platforms-for-people-above-55-in-mumbai | category: comparison
-  meta_description: Discover Marzi, the premier app for people above 55 in Mumbai seeking 20+ unique offline social events monthly. No subscription, pay per event for real connections.
-  tags: ['Marzi', 'Mumbai senior social events', '55+ offline meetups', 'social apps for seniors India', 'no subscription events', 'in-person social activities Mumbai', 'senior citizen social clubs', 'Marzi app']
-  html_length: 10441 chars
-  jsonld_specific_data keys: ['mentions', 'features', 'pricing', 'ratings', 'key_facts']
-12:29:46 [app.agents.pipeline] INFO: [Pipeline] Agent 4: Compiling...
-12:29:46 [app.agents.compiler] INFO: [Compiler] Compiling page: slug='marzi-best-social-platforms-for-people-above-55-in-mumbai'
-12:29:46 [app.agents.compiler] INFO: [Compiler] JSON-LD generated: @type=Article
-12:29:46 [app.agents.compiler] INFO: [Compiler] Written: /Users/prabhaskalyan/AEOAgents/firebase-hosting/public/marzi-best-social-platforms-for-people-above-55-in-mumbai.html (29385 bytes)
-12:29:46 [app.agents.pipeline] INFO: [Compiler] Result:
-  file: /Users/prabhaskalyan/AEOAgents/firebase-hosting/public/marzi-best-social-platforms-for-people-above-55-in-mumbai.html (29385 bytes)
+  meta_description: Explore Marzi, Mumbai's leading app for people above 55 seeking vibrant offline social events. Enjoy 20+ themed meetups monthly – music, dance, book clubs, and more. No subscription, pay per event.
+  tags: ['Marzi', 'Mumbai', 'senior social events', '55+ meetups', 'offline activities', 'senior apps India', 'pay-per-event', 'social for seniors', 'senior citizens Mumbai', 'in-person events']
+  html_length: 11334 chars
+  jsonld_specific_data keys: ['mentions', 'features', 'pricing', 'key_facts']
+12:57:05 [app.agents.pipeline] INFO: [Pipeline] Agent 4: Compiling...
+12:57:05 [app.agents.compiler] INFO: [Compiler] Compiling page: slug='marzi-best-social-platforms-for-people-above-55-in-mumbai'
+12:57:05 [app.agents.compiler] INFO: [Compiler] JSON-LD generated: @type=Article
+12:57:05 [app.agents.compiler] INFO: [Compiler] Written: /Users/prabhaskalyan/AEOAgents/firebase-hosting/public/marzi-best-social-platforms-for-people-above-55-in-mumbai.html (31531 bytes)
+12:57:05 [app.agents.pipeline] INFO: [Compiler] Result:
+  file: /Users/prabhaskalyan/AEOAgents/firebase-hosting/public/marzi-best-social-platforms-for-people-above-55-in-mumbai.html (31531 bytes)
   jsonld @type: Article
-  category: comparison | tags: ['Marzi', 'Mumbai senior social events', '55+ offline meetups', 'social apps for seniors India', 'no subscription events', 'in-person social activities Mumbai', 'senior citizen social clubs', 'Marzi app']
-12:29:46 [app.agents.pipeline] INFO: 
+  category: comparison | tags: ['Marzi', 'Mumbai', 'senior social events', '55+ meetups', 'offline activities', 'senior apps India', 'pay-per-event', 'social for seniors', 'senior citizens Mumbai', 'in-person events']
+12:57:05 [app.agents.pipeline] INFO: 
 --- Topic 4/4: social activities for seniors above 55 in Indian cities ---
-12:29:46 [app.agents.pipeline] INFO: [Pipeline] Agent 1: Researching...
-12:29:46 [app.agents.researcher] INFO: [Researcher] Starting research: topic='social activities for seniors above 55 in Indian cities' brand='https://marzi.life'
-12:29:46 [httpx] INFO: HTTP Request: GET https://marzi.life "HTTP/1.1 200 OK"
-12:29:47 [httpx] INFO: HTTP Request: GET https://marzi.life/assets/index-DFcUnJ6n.css "HTTP/1.1 200 OK"
-12:29:47 [app.agents.researcher] INFO: [Researcher] Scraped brand: Marzi
-12:29:47 [app.agents.researcher] INFO: [Researcher] Curated brand context loaded
-12:29:48 [httpx] INFO: HTTP Request: GET https://serpapi.com/search.json?q=social+activities+for+seniors+above+55+in+Indian+cities&api_key=88e9df8bf5192113827878d7de00a1f19f57e04ff7d49e944acdd7d9a9f4a653&engine=google&num=10&gl=in&hl=en "HTTP/1.1 200 OK"
-12:29:51 [httpx] INFO: HTTP Request: GET https://serpapi.com/search.json?q=Marzi+social+activities+for+seniors+above+55+in+Indian+cities&api_key=88e9df8bf5192113827878d7de00a1f19f57e04ff7d49e944acdd7d9a9f4a653&engine=google&num=10&gl=in&hl=en "HTTP/1.1 200 OK"
-12:29:51 [app.agents.researcher] INFO: [Researcher] SERP: 18 organic, 4 PAA, 16 related, answer_box=no
-12:29:51 [google_genai.models] INFO: AFC is enabled with max remote calls: 10.
-12:30:07 [httpx] INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-12:30:07 [app.agents.researcher] INFO: [Researcher] LLM analysis: intent=informational (confidence=0.8) — The SERP is dominated by general informational articles, guides, and promotional pages for senior communities and activity lists.
-12:30:07 [app.agents.researcher] INFO: [Researcher] Gap analysis: 7 gaps, 6 angles, 7 competitor topics covered
-12:30:07 [app.agents.pipeline] INFO: [Researcher] Result:
+12:57:05 [app.agents.pipeline] INFO: [Pipeline] Agent 1: Researching...
+12:57:05 [app.agents.researcher] INFO: [Researcher] Starting research: topic='social activities for seniors above 55 in Indian cities' brand='https://marzi.life'
+12:57:05 [httpx] INFO: HTTP Request: GET https://marzi.life "HTTP/1.1 200 OK"
+12:57:05 [httpx] INFO: HTTP Request: GET https://marzi.life/assets/index-DFcUnJ6n.css "HTTP/1.1 200 OK"
+12:57:05 [app.agents.researcher] INFO: [Researcher] Scraped brand: Marzi
+12:57:05 [app.agents.researcher] INFO: [Researcher] Curated brand context loaded
+12:57:06 [httpx] INFO: HTTP Request: GET https://serpapi.com/search.json?q=social+activities+for+seniors+above+55+in+Indian+cities&api_key=88e9df8bf5192113827878d7de00a1f19f57e04ff7d49e944acdd7d9a9f4a653&engine=google&num=10&gl=in&hl=en "HTTP/1.1 200 OK"
+12:57:06 [httpx] INFO: HTTP Request: GET https://serpapi.com/search.json?q=Marzi+social+activities+for+seniors+above+55+in+Indian+cities&api_key=88e9df8bf5192113827878d7de00a1f19f57e04ff7d49e944acdd7d9a9f4a653&engine=google&num=10&gl=in&hl=en "HTTP/1.1 200 OK"
+12:57:06 [app.agents.researcher] INFO: [Researcher] SERP: 18 organic, 4 PAA, 16 related, answer_box=no
+12:57:06 [google_genai.models] INFO: AFC is enabled with max remote calls: 10.
+12:57:20 [httpx] INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+12:57:20 [app.agents.researcher] INFO: [Researcher] LLM analysis: intent=informational (confidence=0.8) — The SERP is dominated by general articles, lists of activities, and promotions of various senior communities and clubs.
+12:57:20 [app.agents.researcher] INFO: [Researcher] Gap analysis: 7 gaps, 7 angles, 7 competitor topics covered
+12:57:20 [app.agents.pipeline] INFO: [Researcher] Result:
   brand: Marzi
-  serp_intent: informational (confidence=0.8, signals={'reasoning': 'The SERP is dominated by general informational articles, guides, and promotional pages for senior communities and activity lists.'})
+  serp_intent: informational (confidence=0.8, signals={'reasoning': 'The SERP is dominated by general articles, lists of activities, and promotions of various senior communities and clubs.'})
   organic_results: 18 | paa: 4 | related: 16 | answer_box: no
   people_also_ask:
     • Where is the best place for seniors to socialize?
@@ -341,43 +344,43 @@
     • What is Ratan Tata initiative for senior citizens?
     • Which city is best for senior citizens to live in India?
   competitor_topics_covered:
-    • General social and community activities for seniors
-    • Specific activity types (yoga, arts, dance, fitness, cultural)
-    • Senior clubs, community centers, and organizations
-    • Promotion of specific senior living communities/platforms
-    • Benefits of social engagement for seniors (physical/mental health)
+    • General social activities for seniors
+    • Senior communities and clubs in India
+    • Specific activities (yoga, arts, dance, cultural)
+    • Benefits of social engagement for seniors
+    • Senior living communities offering activities
     • … (+2 more)
   gaps:
-    • Quantified event frequency in specific tier-1 cities (e.g., '20+ events per month in Bangalore and Mumbai')
-    • Emphasis on intimate group sizes for social interaction (e.g., '20-60 participants per event')
-    • Strictly offline-first model (competitors often mention online/hybrid options)
-    • Pay-per-event pricing model (vs. implied subscriptions/memberships)
-    • Detailed, diverse themed event categories (e.g., 'Music sessions, Dance events, Storytelling circles')
+    • Lack of focus on exclusively in-person, offline social events, contrasting with mixed online/offline models.
+    • Absence of specific, diverse themed event categories like music sessions, storytelling circles, or upskilling workshops.
+    • Missing quantification of event frequency (e.g., '20+ events per month') in major Indian cities.
+    • No mention of optimal group sizes (e.g., '20-60 participants') for fostering genuine connections.
+    • Lack of detail on flexible, pay-per-event pricing models, contrasting with potential subscription fees.
     • … (+2 more)
   unique_angles:
-    • Discover 20+ unique in-person social events monthly in Bangalore & Mumbai for seniors 55+.
-    • Engage in themed offline meetups (music, dance, books, storytelling) with 20-60 participants for genuine connection.
-    • Enjoy social activities with no subscription – pay only for the Marzi events you choose to attend.
-    • Seamlessly browse and book Marzi's curated senior events in Bangalore & Mumbai via our app.
-    • Experience diverse upskilling workshops and social parties, exclusively designed for active seniors above 55.
-    • … (+1 more)
-  suggested_title: Highlight 20+ monthly in-person social events for seniors 55+ in Bangalore & Mumbai with no subscription.
-12:30:07 [app.agents.pipeline] INFO: [Pipeline] Agent 2: Strategizing...
-12:30:07 [app.agents.strategist] INFO: [Strategist] Planning content for topic='social activities for seniors above 55 in Indian cities'
-12:30:07 [app.agents.strategist] INFO: [Strategist] SERP-derived category: informational (intent=informational, confidence=0.8)
-12:30:07 [app.agents.strategist] INFO: [Strategist] Slug='marzi-social-activities-for-seniors-above-55-in-indian-cities'
-12:30:07 [app.agents.strategist] INFO: [Strategist] Blueprint: category=informational, 9 sections, 13 facts, 6 angles, 7 competitor topics
-12:30:07 [app.agents.pipeline] INFO: [Strategist] Result:
+    • Marzi's *offline-first* approach, ensuring real, face-to-face connections for seniors above 55.
+    • The *high frequency* of 20+ unique events per month in both Bangalore and Mumbai.
+    • The *diverse themed events* including live music, dance workshops, book clubs, and storytelling circles.
+    • The *flexible pay-per-event model* with no subscriptions or recurring fees.
+    • The *curated group size* of 20-60 participants for intimate and engaging interactions.
+    • … (+2 more)
+  suggested_title: Discover 20+ Monthly *In-Person* Social Events for Seniors 55+ in Bangalore & Mumbai – No Subscriptions.
+12:57:20 [app.agents.pipeline] INFO: [Pipeline] Agent 2: Strategizing...
+12:57:20 [app.agents.strategist] INFO: [Strategist] Planning content for topic='social activities for seniors above 55 in Indian cities'
+12:57:20 [app.agents.strategist] INFO: [Strategist] SERP-derived category: informational (intent=informational, confidence=0.8)
+12:57:20 [app.agents.strategist] INFO: [Strategist] Slug='marzi-social-activities-for-seniors-above-55-in-indian-cities'
+12:57:20 [app.agents.strategist] INFO: [Strategist] Blueprint: category=informational, 9 sections, 13 facts, 7 angles, 7 competitor topics
+12:57:20 [app.agents.pipeline] INFO: [Strategist] Result:
   category: informational | schema: BlogPosting
   slug: marzi-social-activities-for-seniors-above-55-in-indian-cities
-  title_direction: Highlight 20+ monthly in-person social events for seniors 55+ in Bangalore & Mumbai with no subscription.
+  title_direction: Discover 20+ Monthly *In-Person* Social Events for Seniors 55+ in Bangalore & Mumbai – No Subscriptions.
   primary_entity: Marzi | related: ['Bangalore', 'Mumbai']
   section_outline (9):
-    • The short answer: Discover 20+ unique in-person social events monthly in Bangalore & Mumbai for seniors 55+.
+    • The short answer: Marzi's *offline-first* approach, ensuring real, face-to-face connections for seniors…
     • What 'social activities for seniors above 55 in Indian cities' actually means right now
-    • What most sources miss: Quantified event frequency in specific tier-1 cities (e.g., '20+ events per month in…
-    • What most sources miss: Emphasis on intimate group sizes for social interaction (e.g., '20-60 participants per…
-    • What most sources miss: Strictly offline-first model (competitors often mention online/hybrid options)
+    • What most sources miss: Lack of focus on exclusively in-person, offline social events, contrasting with mixed…
+    • What most sources miss: Absence of specific, diverse themed event categories like music sessions, storytelling…
+    • What most sources miss: Missing quantification of event frequency (e.g., '20+ events per month') in major Indian…
     • Where is the best place for seniors to socialize?
     • Which activities can help the 56-70 yrs group make more friends?
     • What is Ratan Tata initiative for senior citizens?
@@ -392,54 +395,62 @@
     • Booking: App-first. Download the Marzi app, browse upcoming events, select an event, pay for it, and attend.
     • Event theme: Music sessions (live performances, sing-alongs, music appreciation)
     • … (+5 more)
-  information_gain_angles (6):
-    • Discover 20+ unique in-person social events monthly in Bangalore & Mumbai for seniors 55+.
-    • Engage in themed offline meetups (music, dance, books, storytelling) with 20-60 participants for genuine connection.
-    • Enjoy social activities with no subscription – pay only for the Marzi events you choose to attend.
-    • Seamlessly browse and book Marzi's curated senior events in Bangalore & Mumbai via our app.
-    • Experience diverse upskilling workshops and social parties, exclusively designed for active seniors above 55.
-    • … (+1 more)
-12:30:07 [app.agents.pipeline] INFO: [Pipeline] Agent 3: Writing...
-12:30:07 [app.agents.writer] INFO: [Writer] Generating content for slug='marzi-social-activities-for-seniors-above-55-in-indian-cities'
-12:30:07 [google_genai.models] INFO: AFC is enabled with max remote calls: 10.
-12:30:31 [httpx] INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-12:30:31 [app.agents.writer] INFO: [Writer] Content generated: title='Marzi: 20+ Monthly In-Person Social Events for Seniors 55+ in Bangalore & Mumbai (No Subscription)', 8 tags
-12:30:31 [app.agents.pipeline] INFO: [Writer] Result:
-  title: Marzi: 20+ Monthly In-Person Social Events for Seniors 55+ in Bangalore & Mumbai (No Subscription)
+  information_gain_angles (7):
+    • Marzi's *offline-first* approach, ensuring real, face-to-face connections for seniors above 55.
+    • The *high frequency* of 20+ unique events per month in both Bangalore and Mumbai.
+    • The *diverse themed events* including live music, dance workshops, book clubs, and storytelling circles.
+    • The *flexible pay-per-event model* with no subscriptions or recurring fees.
+    • The *curated group size* of 20-60 participants for intimate and engaging interactions.
+    • … (+2 more)
+12:57:20 [app.agents.pipeline] INFO: [Pipeline] Agent 3: Writing...
+12:57:20 [app.agents.writer] INFO: [Writer] Generating content for slug='marzi-social-activities-for-seniors-above-55-in-indian-cities'
+12:57:20 [google_genai.models] INFO: AFC is enabled with max remote calls: 10.
+12:58:00 [httpx] INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+12:58:00 [app.agents.writer] INFO: [Writer] Content generated: title='Marzi: 20+ Monthly In-Person Social Events for Seniors 55+ in Bangalore & Mumbai', 8 tags
+12:58:00 [app.agents.pipeline] INFO: [Writer] Result:
+  title: Marzi: 20+ Monthly In-Person Social Events for Seniors 55+ in Bangalore & Mumbai
   slug: marzi-social-activities-for-seniors-above-55-in-indian-cities | category: informational
-  meta_description: Discover Marzi: 20+ monthly in-person social events for seniors 55+ in Bangalore & Mumbai. Enjoy themed meetups (music, dance, books) with no subscription. Book via app for real connections.
-  tags: ['Marzi', 'senior social activities', '55+ events Bangalore', '55+ events Mumbai', 'offline meetups seniors', 'no subscription social groups', 'senior citizen activities India', 'themed events for seniors']
-  html_length: 9556 chars
+  meta_description: Marzi offers 20+ monthly offline social events for people 55+ in Bangalore & Mumbai. Enjoy music, dance, book clubs, and more with no subscription. Pay per event.
+  tags: ['Marzi', 'senior social events', 'activities for seniors India', '55+ meetups Bangalore', '55+ meetups Mumbai', 'offline social events', 'senior citizens clubs', 'pay-per-event social']
+  html_length: 11634 chars
   jsonld_specific_data keys: ['mentions', 'features', 'pricing', 'ratings', 'key_facts']
-12:30:31 [app.agents.pipeline] INFO: [Pipeline] Agent 4: Compiling...
-12:30:31 [app.agents.compiler] INFO: [Compiler] Compiling page: slug='marzi-social-activities-for-seniors-above-55-in-indian-cities'
-12:30:31 [app.agents.compiler] INFO: [Compiler] JSON-LD generated: @type=BlogPosting
-12:30:31 [app.agents.compiler] INFO: [Compiler] Written: /Users/prabhaskalyan/AEOAgents/firebase-hosting/public/marzi-social-activities-for-seniors-above-55-in-indian-cities.html (29773 bytes)
-12:30:31 [app.agents.pipeline] INFO: [Compiler] Result:
-  file: /Users/prabhaskalyan/AEOAgents/firebase-hosting/public/marzi-social-activities-for-seniors-above-55-in-indian-cities.html (29773 bytes)
+12:58:00 [app.agents.pipeline] INFO: [Pipeline] Agent 4: Compiling...
+12:58:00 [app.agents.compiler] INFO: [Compiler] Compiling page: slug='marzi-social-activities-for-seniors-above-55-in-indian-cities'
+12:58:00 [app.agents.compiler] INFO: [Compiler] JSON-LD generated: @type=BlogPosting
+12:58:00 [app.agents.compiler] INFO: [Compiler] Written: /Users/prabhaskalyan/AEOAgents/firebase-hosting/public/marzi-social-activities-for-seniors-above-55-in-indian-cities.html (30684 bytes)
+12:58:00 [app.agents.pipeline] INFO: [Compiler] Result:
+  file: /Users/prabhaskalyan/AEOAgents/firebase-hosting/public/marzi-social-activities-for-seniors-above-55-in-indian-cities.html (30684 bytes)
   jsonld @type: BlogPosting
-  category: informational | tags: ['Marzi', 'senior social activities', '55+ events Bangalore', '55+ events Mumbai', 'offline meetups seniors', 'no subscription social groups', 'senior citizen activities India', 'themed events for seniors']
-12:30:31 [app.agents.pipeline] INFO: 
+  category: informational | tags: ['Marzi', 'senior social events', 'activities for seniors India', '55+ meetups Bangalore', '55+ meetups Mumbai', 'offline social events', 'senior citizens clubs', 'pay-per-event social']
+12:58:00 [app.agents.pipeline] INFO: 
 --- Agent 5: Distributing 4 pages ---
-12:30:31 [app.agents.distributor] INFO: [Distributor] Starting distribution for 4 pages
-12:30:31 [app.agents.distributor] INFO: [Distributor] Index updated: /Users/prabhaskalyan/AEOAgents/firebase-hosting/public/index.html
-12:30:31 [app.agents.distributor] INFO: [Distributor] Sitemap generated: /Users/prabhaskalyan/AEOAgents/firebase-hosting/public/sitemap.xml
-12:30:31 [app.agents.distributor] INFO: [Distributor] robots.txt generated: /Users/prabhaskalyan/AEOAgents/firebase-hosting/public/robots.txt
-12:30:31 [app.agents.distributor] INFO: [Distributor] llms.txt generated: /Users/prabhaskalyan/AEOAgents/firebase-hosting/public/llms.txt (2075 bytes)
-12:31:06 [app.agents.distributor] INFO: [Distributor] Firebase deploy succeeded
-12:31:06 [app.agents.distributor] INFO: [Distributor] Done: index=True, sitemap=True, llms_txt=True, deployed=True
-12:31:06 [app.agents.pipeline] INFO: [Distributor] Result:
+12:58:00 [app.agents.distributor] INFO: [Distributor] Starting distribution for 4 pages
+12:58:00 [app.agents.distributor] INFO: [Distributor] Merged pages: 23 existing, 4 from current run, 23 total
+12:58:00 [app.agents.distributor] INFO: [Distributor] Index updated: /Users/prabhaskalyan/AEOAgents/firebase-hosting/public/index.html
+12:58:00 [app.agents.distributor] INFO: [Distributor] Sitemap generated: /Users/prabhaskalyan/AEOAgents/firebase-hosting/public/sitemap.xml
+12:58:00 [app.agents.distributor] INFO: [Distributor] robots.txt generated: /Users/prabhaskalyan/AEOAgents/firebase-hosting/public/robots.txt
+12:58:00 [app.agents.distributor] INFO: [Distributor] llms.txt generated: /Users/prabhaskalyan/AEOAgents/firebase-hosting/public/llms.txt (8124 bytes)
+12:58:16 [app.agents.distributor] INFO: [Distributor] Firebase deploy succeeded
+12:58:16 [app.agents.distributor] INFO: [Distributor] Done: index=True, sitemap=True, llms_txt=True, deployed=True
+12:58:16 [app.agents.pipeline] INFO: [Distributor] Result:
   index updated: True | sitemap: True | robots: True | llms.txt: True
   deploy: deployed
-  live_urls (4):
-    • https://marziblogs.web.app/marzi-offline-social-events-for-people-above-55-in-bangalore
-    • https://marziblogs.web.app/marzi-find-friends-after-retirement-in-india
+  live_urls (23):
+    • https://marziblogs.web.app/marzi-90-minute-rule-why-marzi-caps-senior-social-events-at-20-60-people-and-90
     • https://marziblogs.web.app/marzi-best-social-platforms-for-people-above-55-in-mumbai
-    • https://marziblogs.web.app/marzi-social-activities-for-seniors-above-55-in-indian-cities
-12:31:06 [app.agents.pipeline] INFO: 
+    • https://marziblogs.web.app/marzi-comparison-reviews
+    • https://marziblogs.web.app/marzi-faq
+    • https://marziblogs.web.app/marzi-find-friends-after-retirement-in-india
+    • https://marziblogs.web.app/marzi-find-new-friends-after-55-in-bangalore
+    • https://marziblogs.web.app/marzi-get-st-rted-with-m-rzi-book-your-first-offline-event-for-55
+    • https://marziblogs.web.app/marzi-get-started-with-marzi-book-your-first-offline-event-for-55
+    • https://marziblogs.web.app/marzi-howto-guide
+    • https://marziblogs.web.app/marzi-info-guide
+    • … (+13 more)
+12:58:16 [app.agents.pipeline] INFO: 
 ============================================================
-12:31:06 [app.agents.pipeline] INFO: Pipeline complete: 4 pages compiled, 0 errors
-12:31:06 [app.agents.pipeline] INFO: ============================================================
+12:58:16 [app.agents.pipeline] INFO: Pipeline complete: 4 pages compiled, 0 errors
+12:58:16 [app.agents.pipeline] INFO: ============================================================
 
 ============================================================
 AEO 5-Agent Pipeline
@@ -453,20 +464,39 @@ Deploy: True
 RESULTS
 ============================================================
 Pages compiled: 4
-  • Marzi: Unlock 20+ Monthly Offline Social Events for Bangalore Seniors (55+)
+  • Marzi: Discover 20+ Monthly Offline Events for 55+ in Bangalore (Pay-Per-Event)
     → /Users/prabhaskalyan/AEOAgents/firebase-hosting/public/marzi-offline-social-events-for-people-above-55-in-bangalore.html
-  • Find 55+ Friends: 20+ Offline Themed Events Monthly with Marzi
+  • Marzi: Find Friends After Retirement in Bangalore & Mumbai (55+ Offline Events)
     → /Users/prabhaskalyan/AEOAgents/firebase-hosting/public/marzi-find-friends-after-retirement-in-india.html
-  • Marzi: Best Offline Social Events for 55+ in Mumbai (No Subscription)
+  • Marzi: Mumbai's Best Offline Social Events for 55+ with 20+ Monthly Meetups
     → /Users/prabhaskalyan/AEOAgents/firebase-hosting/public/marzi-best-social-platforms-for-people-above-55-in-mumbai.html
-  • Marzi: 20+ Monthly In-Person Social Events for Seniors 55+ in Bangalore & Mumbai (No Subscription)
+  • Marzi: 20+ Monthly In-Person Social Events for Seniors 55+ in Bangalore & Mumbai
     → /Users/prabhaskalyan/AEOAgents/firebase-hosting/public/marzi-social-activities-for-seniors-above-55-in-indian-cities.html
 
 Deployment: SUCCESS
 Live URLs:
-  → https://marziblogs.web.app/marzi-offline-social-events-for-people-above-55-in-bangalore
-  → https://marziblogs.web.app/marzi-find-friends-after-retirement-in-india
+  → https://marziblogs.web.app/marzi-90-minute-rule-why-marzi-caps-senior-social-events-at-20-60-people-and-90
   → https://marziblogs.web.app/marzi-best-social-platforms-for-people-above-55-in-mumbai
+  → https://marziblogs.web.app/marzi-comparison-reviews
+  → https://marziblogs.web.app/marzi-faq
+  → https://marziblogs.web.app/marzi-find-friends-after-retirement-in-india
+  → https://marziblogs.web.app/marzi-find-new-friends-after-55-in-bangalore
+  → https://marziblogs.web.app/marzi-get-st-rted-with-m-rzi-book-your-first-offline-event-for-55
+  → https://marziblogs.web.app/marzi-get-started-with-marzi-book-your-first-offline-event-for-55
+  → https://marziblogs.web.app/marzi-howto-guide
+  → https://marziblogs.web.app/marzi-info-guide
+  → https://marziblogs.web.app/marzi-m-rzi-offline-events-pl-tform-for-people-bove-55
+  → https://marziblogs.web.app/marzi-m-rzi-offline-soci-l-events-for-people-bove-55-in-b-g-lore-d-mumb-i
+  → https://marziblogs.web.app/marzi-offline-events-platform-for-people-above-55
+  → https://marziblogs.web.app/marzi-offline-social-engagement
+  → https://marziblogs.web.app/marzi-offline-social-events-for-people-above-55-in-bangalore
+  → https://marziblogs.web.app/marzi-offline-social-events-for-people-above-55-in-bangalore-and-mumbai
+  → https://marziblogs.web.app/marzi-plan-60th-birthday-party
+  → https://marziblogs.web.app/marzi-social-activities-for-retirees-in-bangalore
   → https://marziblogs.web.app/marzi-social-activities-for-seniors-above-55-in-indian-cities
+  → https://marziblogs.web.app/marzi-topic-b-test-for-cross-run
+  → https://marziblogs.web.app/marzi-topic-test-for-cross-run
+  → https://marziblogs.web.app/marzi-vs-meetup-for-seniors
+  → https://marziblogs.web.app/marzi-vs-other-social-platforms-for-people-above-55-offline-meetups-comparison
 ============================================================
 

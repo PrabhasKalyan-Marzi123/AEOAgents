@@ -14,11 +14,13 @@ Output: DeploymentResult with URLs and deployment status.
 
 from __future__ import annotations
 
+import json
 import logging
+import re
 import subprocess
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from html import escape
+from html import escape, unescape
 from pathlib import Path
 
 from app.config import settings
@@ -59,6 +61,73 @@ _LLMS_CATEGORY_HEADINGS = {
     "comparison": "Comparisons & Reviews",
     "informational": "Articles",
 }
+
+# Inverse of strategist._SCHEMA_MAP — used when reconstructing pages from disk.
+_SCHEMA_TO_CATEGORY = {
+    "FAQPage": "faq",
+    "HowTo": "how-to",
+    "Article": "comparison",
+    "BlogPosting": "informational",
+}
+
+_TITLE_RE = re.compile(r"<title[^>]*>(.*?)</title>", re.IGNORECASE | re.DOTALL)
+_META_DESC_RE = re.compile(
+    r'<meta\s+name=["\']description["\']\s+content=["\'](.*?)["\']',
+    re.IGNORECASE | re.DOTALL,
+)
+_JSONLD_RE = re.compile(
+    r'<script[^>]*type=["\']application/ld\+json["\'][^>]*>(.*?)</script>',
+    re.IGNORECASE | re.DOTALL,
+)
+
+
+def _parse_html_to_page(html_path: Path) -> CompiledPage:
+    """Reconstruct a CompiledPage from a previously-written .html file.
+
+    Reads <title>, <meta name="description">, and the JSON-LD @type to fill in
+    enough metadata for the index/sitemap/llms.txt builders.
+    """
+    text = html_path.read_text(encoding="utf-8", errors="replace")
+    slug = html_path.stem
+
+    # Title — strip a trailing " | {site_name}" suffix that the template adds.
+    title = ""
+    m = _TITLE_RE.search(text)
+    if m:
+        title = unescape(m.group(1)).strip()
+        suffix = f" | {settings.site_name}"
+        if title.endswith(suffix):
+            title = title[: -len(suffix)].rstrip()
+
+    # Meta description
+    meta_description = ""
+    m = _META_DESC_RE.search(text)
+    if m:
+        meta_description = unescape(m.group(1)).strip()
+
+    # JSON-LD @type → category
+    category = "informational"
+    jsonld: dict = {}
+    m = _JSONLD_RE.search(text)
+    if m:
+        try:
+            jsonld = json.loads(m.group(1).strip())
+            schema_type = jsonld.get("@type") if isinstance(jsonld, dict) else None
+            if isinstance(schema_type, str):
+                category = _SCHEMA_TO_CATEGORY.get(schema_type, "informational")
+        except json.JSONDecodeError:
+            jsonld = {}
+
+    return CompiledPage(
+        file_path=str(html_path),
+        slug=slug,
+        title=title or slug,
+        category=category,
+        meta_description=meta_description,
+        tags=[],
+        jsonld=jsonld,
+        full_html="",
+    )
 
 
 def _build_llms_txt(pages: list[CompiledPage]) -> str:
@@ -241,6 +310,37 @@ class DistributorAgent:
             logger.error(f"[Distributor] Failed to generate llms.txt: {e}")
             return False
 
+    def _discover_existing_pages(self) -> list[CompiledPage]:
+        """Scan output_dir for already-published .html files and reconstruct CompiledPage entries.
+
+        Lets index/sitemap/llms.txt accumulate pages across multiple pipeline runs:
+        the filesystem is the source of truth for what's live.
+        """
+        if not self.output_dir.exists():
+            return []
+
+        discovered: list[CompiledPage] = []
+        for html_path in sorted(self.output_dir.glob("*.html")):
+            if html_path.name == "index.html":
+                continue
+            try:
+                discovered.append(_parse_html_to_page(html_path))
+            except Exception as e:
+                logger.warning(f"[Distributor] Skipping unparseable file {html_path.name}: {e}")
+        return discovered
+
+    def _merge_pages(
+        self,
+        current: list[CompiledPage],
+        existing: list[CompiledPage],
+    ) -> list[CompiledPage]:
+        """Merge discovered pages with current-run pages. Current run wins on slug collision."""
+        merged: dict[str, CompiledPage] = {p.slug: p for p in existing if p.slug}
+        for p in current:
+            if p.slug:
+                merged[p.slug] = p
+        return sorted(merged.values(), key=lambda p: p.slug)
+
     def _deploy_firebase(self) -> tuple[bool, str]:
         """Execute firebase deploy --only hosting.
 
@@ -295,23 +395,32 @@ class DistributorAgent:
 
         result = DeploymentResult()
 
-        # Collect page metadata
+        # Discover already-published pages on disk and merge — sitemap/index/llms.txt
+        # accumulate every live page across pipeline runs, not just the current batch.
+        existing = self._discover_existing_pages()
+        all_pages = self._merge_pages(pages, existing)
+        logger.info(
+            f"[Distributor] Merged pages: {len(existing)} existing, "
+            f"{len(pages)} from current run, {len(all_pages)} total"
+        )
+
+        # Collect page metadata for current run only (what got published this time)
         result.pages_published = [
             {"slug": p.slug, "title": p.title, "category": p.category}
             for p in pages
         ]
 
-        # 1. Update index
-        result.index_updated = self._update_index(pages)
+        # 1. Update index — use the union so old pages stay discoverable
+        result.index_updated = self._update_index(all_pages)
 
-        # 2. Sitemap
-        result.sitemap_generated = self._generate_sitemap(pages)
+        # 2. Sitemap — every live URL
+        result.sitemap_generated = self._generate_sitemap(all_pages)
 
         # 3. Robots.txt
         result.robots_generated = self._generate_robots()
 
-        # 4. llms.txt (AI-crawler markdown index)
-        result.llms_txt_generated = self._generate_llms_txt(pages)
+        # 4. llms.txt (AI-crawler markdown index) — every live URL
+        result.llms_txt_generated = self._generate_llms_txt(all_pages)
 
         # 5. Deploy
         if deploy:
@@ -321,9 +430,9 @@ class DistributorAgent:
         else:
             logger.info("[Distributor] Skipping Firebase deploy (deploy=False)")
 
-        # Build live URLs
+        # Build live URLs from the union — the printed summary lists everything live
         result.live_urls = [
-            f"{settings.site_url}/{p.slug}" for p in pages
+            f"{settings.site_url}/{p.slug}" for p in all_pages
         ]
 
         logger.info(
