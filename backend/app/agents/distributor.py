@@ -40,6 +40,7 @@ class DeploymentResult:
     index_updated: bool = False
     sitemap_generated: bool = False
     robots_generated: bool = False
+    llms_txt_generated: bool = False
     deploy_output: str = ""
     live_urls: list[str] = field(default_factory=list)
 
@@ -51,6 +52,72 @@ _CATEGORY_DISPLAY = {
     "comparison": {"label": "Review + ItemList schema", "icon": "bar-chart"},
     "informational": {"label": "Article schema", "icon": "journal-text"},
 }
+
+_LLMS_CATEGORY_HEADINGS = {
+    "faq": "FAQ & Q&A",
+    "how-to": "How-To Guides",
+    "comparison": "Comparisons & Reviews",
+    "informational": "Articles",
+}
+
+
+def _build_llms_txt(pages: list[CompiledPage]) -> str:
+    """Build llms.txt — a markdown index for AI crawlers (https://llmstxt.org).
+
+    Groups pages by category and lists each as `- [Title](URL): description`.
+    """
+    site_url = settings.site_url.rstrip("/")
+    summary = (
+        f"AEO-optimized content for {settings.organization_name} — offline social "
+        f"events for people above 55 in Bangalore and Mumbai. Each page is a snippet-ready "
+        f"answer aligned to a schema.org type (FAQPage, HowTo, Article, BlogPosting)."
+    )
+
+    grouped: dict[str, list[CompiledPage]] = {}
+    for p in pages:
+        grouped.setdefault(p.category, []).append(p)
+
+    lines = [
+        f"# {settings.site_name}",
+        "",
+        f"> {summary}",
+        "",
+        "## About",
+        "",
+        f"- Brand: {settings.organization_name} (https://marzi.life)",
+        f"- Format: 20+ themed offline social events per month, group size 20–60",
+        f"- Cities: Bangalore, Mumbai",
+        f"- Pricing: Pay-per-event (no subscription)",
+        "",
+    ]
+
+    for category in ["faq", "how-to", "comparison", "informational"]:
+        bucket = grouped.get(category)
+        if not bucket:
+            continue
+        heading = _LLMS_CATEGORY_HEADINGS.get(category, category.title())
+        lines.append(f"## {heading}")
+        lines.append("")
+        for p in bucket:
+            url = f"{site_url}/{p.slug}"
+            desc = (p.meta_description or "").strip().replace("\n", " ")
+            if len(desc) > 200:
+                desc = desc[:197].rstrip() + "…"
+            entry = f"- [{p.title}]({url})"
+            if desc:
+                entry += f": {desc}"
+            lines.append(entry)
+        lines.append("")
+
+    lines.extend([
+        "## Optional",
+        "",
+        f"- [Sitemap]({site_url}/sitemap.xml): full machine-readable index of all pages",
+        f"- [robots.txt]({site_url}/robots.txt): crawler policy (AI crawlers explicitly allowed)",
+        "",
+    ])
+
+    return "\n".join(lines)
 
 
 def _build_index_html(pages: list[CompiledPage]) -> str:
@@ -162,6 +229,18 @@ class DistributorAgent:
             logger.error(f"[Distributor] Failed to generate robots.txt: {e}")
             return False
 
+    def _generate_llms_txt(self, pages: list[CompiledPage]) -> bool:
+        """Generate llms.txt — markdown index for AI crawlers (llmstxt.org)."""
+        try:
+            llms_txt = _build_llms_txt(pages)
+            llms_path = self.output_dir / "llms.txt"
+            llms_path.write_text(llms_txt, encoding="utf-8")
+            logger.info(f"[Distributor] llms.txt generated: {llms_path} ({len(llms_txt)} bytes)")
+            return True
+        except Exception as e:
+            logger.error(f"[Distributor] Failed to generate llms.txt: {e}")
+            return False
+
     def _deploy_firebase(self) -> tuple[bool, str]:
         """Execute firebase deploy --only hosting.
 
@@ -231,7 +310,10 @@ class DistributorAgent:
         # 3. Robots.txt
         result.robots_generated = self._generate_robots()
 
-        # 4. Deploy
+        # 4. llms.txt (AI-crawler markdown index)
+        result.llms_txt_generated = self._generate_llms_txt(pages)
+
+        # 5. Deploy
         if deploy:
             deployed, output = self._deploy_firebase()
             result.deployed = deployed
@@ -246,7 +328,8 @@ class DistributorAgent:
 
         logger.info(
             f"[Distributor] Done: index={result.index_updated}, "
-            f"sitemap={result.sitemap_generated}, deployed={result.deployed}"
+            f"sitemap={result.sitemap_generated}, llms_txt={result.llms_txt_generated}, "
+            f"deployed={result.deployed}"
         )
         return result
 

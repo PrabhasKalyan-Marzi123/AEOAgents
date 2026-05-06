@@ -221,7 +221,7 @@ def _log_distributor_result(deployment, requested_deploy: bool) -> None:
     status = "deployed" if deployment.deployed else ("skipped" if not requested_deploy else "failed")
     logger.info(
         "[Distributor] Result:\n"
-        f"  index updated: {deployment.index_updated} | sitemap: {deployment.sitemap_generated} | robots: {deployment.robots_generated}\n"
+        f"  index updated: {deployment.index_updated} | sitemap: {deployment.sitemap_generated} | robots: {deployment.robots_generated} | llms.txt: {deployment.llms_txt_generated}\n"
         f"  deploy: {status}\n"
         f"  live_urls ({len(deployment.live_urls)}):\n{_bullets(deployment.live_urls, limit=10)}"
     )

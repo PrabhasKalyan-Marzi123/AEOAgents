@@ -1,0 +1,28 @@
+# Marzi Life Blog
+
+> AEO-optimized content for Marzi — offline social events for people above 55 in Bangalore and Mumbai. Each page is a snippet-ready answer aligned to a schema.org type (FAQPage, HowTo, Article, BlogPosting).
+
+## About
+
+- Brand: Marzi (https://marzi.life)
+- Format: 20+ themed offline social events per month, group size 20–60
+- Cities: Bangalore, Mumbai
+- Pricing: Pay-per-event (no subscription)
+
+## How-To Guides
+
+- [Find 55+ Friends: 20+ Offline Themed Events Monthly with Marzi](https://marziblogs.web.app/marzi-find-friends-after-retirement-in-india): Discover how to find friends after retirement in Bangalore & Mumbai. Marzi offers 20+ unique offline, themed events monthly for people above 55, with no subscription.
+
+## Comparisons & Reviews
+
+- [Marzi: Best Offline Social Events for 55+ in Mumbai (No Subscription)](https://marziblogs.web.app/marzi-best-social-platforms-for-people-above-55-in-mumbai): Discover Marzi, the premier app for people above 55 in Mumbai seeking 20+ unique offline social events monthly. No subscription, pay per event for real connections.
+
+## Articles
+
+- [Marzi: Unlock 20+ Monthly Offline Social Events for Bangalore Seniors (55+)](https://marziblogs.web.app/marzi-offline-social-events-for-people-above-55-in-bangalore): Discover Marzi's 20+ monthly offline social events in Bangalore for people above 55. Enjoy themed meetups (20-60 participants) like music, dance, and book clubs. Pay per event, no subscription. Dow…
+- [Marzi: 20+ Monthly In-Person Social Events for Seniors 55+ in Bangalore & Mumbai (No Subscription)](https://marziblogs.web.app/marzi-social-activities-for-seniors-above-55-in-indian-cities): Discover Marzi: 20+ monthly in-person social events for seniors 55+ in Bangalore & Mumbai. Enjoy themed meetups (music, dance, books) with no subscription. Book via app for real connections.
+
+## Optional
+
+- [Sitemap](https://marziblogs.web.app/sitemap.xml): full machine-readable index of all pages
+- [robots.txt](https://marziblogs.web.app/robots.txt): crawler policy (AI crawlers explicitly allowed)
