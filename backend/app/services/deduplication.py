@@ -44,7 +44,7 @@ def compute_embedding(text: str) -> list[float]:
     """Compute sentence embedding using all-MiniLM-L6-v2."""
     model = _get_model()
     normalized = _normalize_text(text)
-    embedding = model.encode(normalized, convert_to_numpy=True)
+    embedding = model.encode(normalized, convert_to_numpy=True, show_progress_bar=False)
     return embedding.tolist()
 
 

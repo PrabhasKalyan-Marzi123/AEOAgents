@@ -310,7 +310,7 @@ class DistributorAgent:
             logger.error(f"[Distributor] Failed to generate llms.txt: {e}")
             return False
 
-    def _discover_existing_pages(self) -> list[CompiledPage]:
+    def discover_existing_pages(self) -> list[CompiledPage]:
         """Scan output_dir for already-published .html files and reconstruct CompiledPage entries.
 
         Lets index/sitemap/llms.txt accumulate pages across multiple pipeline runs:
@@ -397,7 +397,7 @@ class DistributorAgent:
 
         # Discover already-published pages on disk and merge — sitemap/index/llms.txt
         # accumulate every live page across pipeline runs, not just the current batch.
-        existing = self._discover_existing_pages()
+        existing = self.discover_existing_pages()
         all_pages = self._merge_pages(pages, existing)
         logger.info(
             f"[Distributor] Merged pages: {len(existing)} existing, "
