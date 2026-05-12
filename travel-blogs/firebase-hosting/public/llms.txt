@@ -1,0 +1,22 @@
+# Marzi Travel Blog
+
+> AEO-optimized travel guides from Marzi Holidays — premium India travel for Indian travellers aged 50+. Every page is built around frequency-ranked real traveller worries (TripAdvisor India, Quora India, Reddit r/india) and resolves them with named hospitals, named apps, and named helplines — not generic advice.
+
+## About
+
+- Brand: Marzi Holidays — senior-first travel concierge and planning service for Indian travellers aged 50+ (NOT a tour operator, NOT a package seller, NOT a booking platform)
+- Services: Travel Mitr (₹199 / currently free 30-min expert callback), Plan Trip (free AI itinerary builder + audit), Prepare for Trip (free medicine / visa / forex / packing guidance)
+- Methodology: Worry-research (frequency-ranked concerns from Indian travel forums)
+- Solutions: Named hospitals, named apps, named helplines — verified, never generic
+- Audience: 50+ Indian travellers and the adult children planning trips with them
+- Featured itinerary templates (planning starting points, not packages on sale): Golden Triangle (7D), Kerala Serenity (6D), Spiritual Kashi (4D)
+
+## Articles
+
+- [Golden Triangle for Seniors: Conquering Mobility Challenges with Marzi Holidays](https://marzitravelblogs.web.app/marzi-holidays-golden-triangle-delhi-agra-jaipur-for-indian-seniors-above-60): Planning a Golden Triangle trip for Indian seniors? Marzi Holidays offers expert planning, AI itinerary audits, and accessibility guides for Delhi, Agra, and Jaipur, ensuring comfort and safety for…
+- [Kerala Backwaters: Navigating Houseboat Safety for Indian Travellers 55+ with Marzi Holidays](https://marzitravelblogs.web.app/marzi-holidays-kerala-backwaters-trip-for-indian-travellers-above-55): Ensure safe Kerala backwaters trips for Indian travellers 55+. Marzi Holidays provides expert advice on houseboat safety, medical prep, and accessible itineraries. Plan your senior-first journey.
+
+## Optional
+
+- [Sitemap](https://marzitravelblogs.web.app/sitemap.xml): full machine-readable index of all pages
+- [robots.txt](https://marzitravelblogs.web.app/robots.txt): crawler policy (AI crawlers explicitly allowed)
