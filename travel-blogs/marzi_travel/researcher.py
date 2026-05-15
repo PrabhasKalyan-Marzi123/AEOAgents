@@ -58,11 +58,32 @@ GOAL: Produce destination-specific traveller-worry research for the topic below,
 
 TOPIC / DESTINATION: "{destination}"
 
+EDITORIAL STANCE — READ FIRST (very important):
+The output blog must be DESTINATION/TOPIC FIRST and Marzi LAST. At least 80% of the blog should be real, useful content about the destination or topic: places to see, suggested itineraries, attractions, practical advice, named hospitals/apps/insurers. Marzi Holidays is mentioned only in ONE closing section near the end as a soft, optional resource — NOT threaded through every section. Do NOT frame the entire piece as "how Marzi solves this." The reader should feel they got a useful guide first; the Marzi mention is a soft offer at the end.
+
+Specifically:
+- If the topic names a destination (e.g. "Kerala backwaters", "Golden Triangle", "Europe destinations for seniors"), surface real PLACES TO SEE (5–7 named attractions / cities / experiences) and an itinerary outline a traveller could actually use.
+- If the topic is service-oriented (e.g. "Cash vs forex card", "Best flight seats", "Travelling without depending on children"), surface practical advice, named tools/products/policies, and real comparisons.
+- The marzi_wow_solution field below should be a SHORT, SOFT closing paragraph — one section near the end — NOT the structural anchor of the piece.
+
+AUDIENCE — READ FIRST:
+The reader is a MOBILE, ACTIVE, affluent Indian traveller 50+ (or their adult child planning the trip). They walk, climb steps, and enjoy full-day sightseeing. They are NOT mobility-impaired. Do NOT default to "wheelchair", "step-free", "Grade-A mobility obstacles" framing unless the topic explicitly names mobility. The real worries for this audience are:
+- International travel anxiety, first-trip-after-retirement confidence
+- Country-specific medicine carry rules (BP, diabetes, thyroid, customs)
+- Flights, seat choice, transit time, airport navigation
+- Hotel selection (floor, room type, lift, neighbourhood) and cheap-hotel traps
+- Itinerary pacing and ENERGY MANAGEMENT (NOT mobility management) — slow travel, fewer cities
+- Forex card vs credit card vs cash, international roaming, safe money handling
+- Destination choice (best first-time international country, Europe walkability)
+- Emotional & identity: independence from adult children, dignity, why travel matters after retirement
+
+DEFAULT CONTEXT: Unless the topic names a specific domestic Indian destination, assume INTERNATIONAL travel.
+
 LIVE-SEARCH METHODOLOGY (use the GoogleSearch tool — do NOT fabricate sources):
-- Search Indian travel forums and writing: TripAdvisor India, Quora India, Reddit r/india, Reddit r/IndiaTravel, blogs and YouTube comments by Indian travellers.
-- Try multiple query variants explicitly: "{destination} 50+ traveller", "{destination} senior citizen India", "{destination} for elderly Indian parents", "{destination} accessibility India", "{destination} medical emergency", "{destination} mobility issues".
+- Search Indian travel forums and writing: TripAdvisor India, Quora India, Reddit r/india, Reddit r/IndiaTravel, Reddit r/IndianTravellers, blogs and YouTube comments by Indian travellers.
+- Try multiple query variants explicitly: "{destination} 50+ Indian traveller", "{destination} senior citizen India", "{destination} for Indian parents", "{destination} first time abroad India", "{destination} forex India", "{destination} Indian medicine customs", "{destination} jet lag Indian seniors". Tailor query variants to the actual TOPIC (don't force mobility queries unless mobility is the topic).
 - Frequency-rank worries before selecting the Top 4 — count the number of distinct threads/posts per worry cluster across the last 24 months.
-- Niche-filter: collapse closely related complaints (e.g. "Uluwatu stairs" + "Besakih steps" + "Ubud hills" → one named worry like "Grade-A Mobility Obstacles").
+- Niche-filter: collapse closely related complaints into one named cluster (e.g. "Schengen visa anxiety" + "biometric appointment delay" + "rejection on weak ITR" → one named worry like "Schengen visa confidence gap for Indian retirees").
 
 WHAT TO RETURN (one JSON object, no prose, no markdown fences):
 
@@ -70,10 +91,22 @@ WHAT TO RETURN (one JSON object, no prose, no markdown fences):
   "destination": "{destination}",
   "frequency_rank_pre_filter": "1 line: e.g. '52 unique threads scanned across TripAdvisor India + Quora India + Reddit r/india.'",
   "niche_filter_applied": "1 line: e.g. 'Collapsed steps/stairs/hills posts into one Mobility Obstacles cluster.'",
+  "destination_content": {{
+    "is_destination_topic": true,
+    "top_places_to_see": [
+      "5–7 entries. For destination topics: real named attractions/cities/experiences with a 1-line description (e.g. 'Alleppey backwaters — overnight houseboat on Punnamada Lake, gentle pace, ideal for seniors who tire easily'). For service/info topics: 5–7 named tools/products/policies/insurers/apps relevant to the topic instead."
+    ],
+    "suggested_itinerary": [
+      "4–7 day-by-day high-level outline. For destination topics: e.g. 'Day 1: Arrive Kochi, settle at Brunton Boatyard, light walk along Fort Kochi sea-face'. For service/info topics: a step-by-step recommended process instead (e.g. 'Step 1: Apply for Schengen visa 8 weeks before travel; Step 2: ...')."
+    ],
+    "practical_facts": [
+      "5–8 concrete, verifiable facts about the destination/topic that the blog body should embed (e.g. 'Munnar is at 1,600m elevation; cool 15–25°C year-round', 'Kerala backwater houseboats cost ₹8,000–₹18,000/night per couple'). Real numbers, real names — never generic."
+    ]
+  }},
   "top_worries": [
     {{
-      "module": "Fit & Design | Readiness | Booking | Health | On-trip Support | Post-trip",
-      "specific_worry": "granular, hyper-specific (NOT 'health concerns' but e.g. 'Insulin spoiling in 33°C heat during full-day temple tours, with no Indian-brand pharmacy backup')",
+      "module": "Anxiety & Confidence | Medicines & Health | Flights & Airports | Hotels & Stay | Itinerary & Pace (Energy Management) | Forex / Payments / Connectivity | Destination Choice | Emotional & Identity",
+      "specific_worry": "granular, hyper-specific (NOT 'health concerns' but e.g. 'Carrying 90-day BP medication into Schengen — original prescription in English vs Hindi, customs declaration risk at Frankfurt'). Match the worry to the active-senior audience, NOT to mobility limitations.",
       "verbatim_quotes": [
         {{"quote": "actual Indian English forum text", "source": "TripAdvisor India / Quora India / Reddit r/india / blog name"}},
         {{"quote": "second quote", "source": "..."}}
@@ -87,10 +120,10 @@ WHAT TO RETURN (one JSON object, no prose, no markdown fences):
     "name": "name of the single hero worry",
     "stated_in_2_3_sentences": "precisely stated; name exact sites, exact physical/emotional challenge, and why skipping them feels like failing the trip",
     "fear_anatomy": [
-      {{"name": "Burden Fear", "internal_monologue": "verbatim internal monologue in quotes"}},
-      {{"name": "Spiritual/Cultural FOMO", "internal_monologue": "..."}},
-      {{"name": "Memory/Photo Fear", "internal_monologue": "..."}},
-      {{"name": "Dignity Fear", "internal_monologue": "..."}}
+      {{"name": "name fear 1 (e.g. Burden-on-children fear, Customs-and-rules fear, Independence-loss fear, FOMO fear, Dignity fear, Money-mistake fear)", "internal_monologue": "verbatim internal monologue in quotes"}},
+      {{"name": "name fear 2", "internal_monologue": "..."}},
+      {{"name": "name fear 3", "internal_monologue": "..."}},
+      {{"name": "name fear 4", "internal_monologue": "..."}}
     ],
     "search_intensity": {{
       "tripadvisor_threads": 0,
@@ -104,7 +137,7 @@ WHAT TO RETURN (one JSON object, no prose, no markdown fences):
       {{"quote": "...", "source": "...", "emotion": "..."}},
       {{"quote": "...", "source": "...", "emotion": "..."}}
     ],
-    "marzi_wow_solution": "how Marzi Holidays addresses this worry through its ADVISORY services — NOT through operating tours or booking infrastructure (Marzi does NOT do those). Choose one or more of: (a) what a Travel Mitr expert flags and recommends during the 30-minute callback; (b) what the free AI Plan-Trip audit catches in an existing itinerary; (c) which Prepare-for-Trip resource resolves it (medicine eligibility checker, e-visa guidance, forex strategy, senior packing list). Reference real 2025–2026 destination infrastructure the traveller can book themselves on Marzi's advice. End with: 'All infrastructure verified via live search, [current month and year]'.",
+    "marzi_wow_solution": "ONE SHORT SOFT CLOSING PARAGRAPH (3–4 sentences max) for a single end-of-article section titled 'How Marzi Holidays can help' or 'Planning this trip with Marzi'. Soft offer, NOT a sales pitch — frame Marzi as a free optional resource the reader can choose to use. Mention ONE or TWO of: Travel Mitr (₹199 / currently free 30-min expert callback), Plan Trip (free AI itinerary builder/audit), Prepare for Trip (free medicine/visa/forex/packing). Avoid phrases like 'Marzi solves this', 'choose Marzi', 'book with Marzi'. Do NOT make this the headline of the piece. Do NOT repeat this in earlier sections.",
     "title_direction": "blog title (60–70 chars) that opens with or names the hero worry; targets the SERP intent for {destination} for Indian travellers 50+"
   }},
   "people_also_ask_equivalents": [
@@ -128,12 +161,15 @@ CRITICAL RULES:
 2. Quotes MUST sound like authentic Indian English forum writing — not formal, not robotic.
 3. Every solution names a specific place / app / person / helpline. No generic advice.
 4. Frequency-rank worries BEFORE selecting the Top 4. Niche-filter. Show the logic.
-5. FACTUAL ACCURACY ABOUT MARZI HOLIDAYS — NON-NEGOTIABLE:
+5. STRUCTURE — DESTINATION/TOPIC FIRST, MARZI LAST (non-negotiable):
+   - At least 80% of the downstream blog will be real destination/topic content (places, itinerary, practical facts). Make sure `destination_content` is rich and concrete.
+   - `marzi_wow_solution` is a soft 3–4 sentence closing paragraph — NOT the article's anchor. Do not let Marzi framing dominate the worry analysis.
+6. FACTUAL ACCURACY ABOUT MARZI HOLIDAYS — NON-NEGOTIABLE:
    - Marzi Holidays is a senior-first travel CONCIERGE and PLANNING service. It is NOT a tour operator and NOT a package seller.
    - Marzi does NOT book hotels, flights, transport, guides, or any on-ground service. The traveller books everything; Marzi advises.
    - Marzi's three services are: Travel Mitr (₹199 / currently free 30-min expert callback at holidays.marzi.life/travel-mitr), Plan Trip (free AI itinerary builder + audit at holidays.marzi.life/plan-trip), and Prepare for Trip (free medicine checker / visa / forex / packing guidance at holidays.marzi.life/prepare).
    - NEVER write that Marzi 'curates stays', 'operates tours', 'arranges transport', 'provides on-trip support staff', 'handles bookings', or sells 'packages' / 'itineraries' as products. Marzi recommends; it does not deliver on the ground.
-6. No <html>, no markdown fences, no prose — return ONLY the JSON object.
+7. No <html>, no markdown fences, no prose — return ONLY the JSON object.
 """
 
 
@@ -257,8 +293,21 @@ def _to_dossier(
     for snippet, uri in zip(snippets, grounding_uris):
         snippet["link"] = uri
 
-    # Trusted solutions → unique_angles (Strategist section seeds + Writer angles).
+    # unique_angles drive Strategist section seeds + Writer information-gain block.
+    # Order matters: destination/topic content leads, Marzi appears once at the very end.
     angles: list[str] = []
+    dc = research.get("destination_content") or {}
+    for place in dc.get("top_places_to_see") or []:
+        if isinstance(place, str) and place.strip():
+            angles.append(f"Place / highlight: {place.strip()}")
+    itinerary = dc.get("suggested_itinerary") or []
+    if itinerary:
+        joined = " | ".join(s.strip() for s in itinerary if isinstance(s, str) and s.strip())
+        if joined:
+            angles.append(f"Suggested itinerary outline (build a dedicated section around this): {joined}")
+    for fact in dc.get("practical_facts") or []:
+        if isinstance(fact, str) and fact.strip():
+            angles.append(f"Practical fact to embed: {fact.strip()}")
     for sol in research.get("trusted_solutions_global") or []:
         if isinstance(sol, str) and sol.strip():
             angles.append(sol.strip())
@@ -266,10 +315,13 @@ def _to_dossier(
         for sol in w.get("trusted_solutions") or []:
             if isinstance(sol, str) and sol.strip() and sol.strip() not in angles:
                 angles.append(sol.strip())
-    # Always include the hero solution as the headline angle.
+    # Marzi soft-close appears LAST, framed as a single closing section.
     hero_solution = (hero.get("marzi_wow_solution") or "").strip()
     if hero_solution:
-        angles.insert(0, f"Marzi Holidays solution: {hero_solution}")
+        angles.append(
+            "Final section ONLY (do NOT thread through earlier sections) — "
+            f"'How Marzi Holidays can help' soft closing paragraph: {hero_solution}"
+        )
 
     gaps = list(research.get("gaps") or [])
     competitor_topics = list(research.get("competing_blog_topics") or [])

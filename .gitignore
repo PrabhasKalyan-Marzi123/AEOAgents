@@ -32,3 +32,4 @@ docker-compose.override.yml
 # Sentence Transformers cache
 .cache/
 claude --resume e8eeea5c-6b9f-448c-9ba2-3733baef89e8
+claude --resume "cumulative-page-indexing"

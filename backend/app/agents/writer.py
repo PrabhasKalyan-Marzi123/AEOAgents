@@ -265,7 +265,7 @@ class WriterAgent:
 
         parsed: dict | None = None
         last_err: Exception | None = None
-        for attempt in (1, 2):
+        for attempt in (1, 2, 3):
             response = client.models.generate_content(
                 model="gemini-2.5-flash",
                 contents=prompt,
@@ -285,13 +285,26 @@ class WriterAgent:
                 break
             except json.JSONDecodeError as e:
                 last_err = e
+                # Lenient fallback: handle truncation / trailing garbage.
+                try:
+                    from app.agents.researcher import _parse_json_lenient
+                    lenient = _parse_json_lenient(raw_text)
+                    if lenient and lenient.get("html"):
+                        parsed = lenient
+                        logger.warning(
+                            f"[Writer] Attempt {attempt} strict JSON failed; "
+                            f"recovered via lenient parse ({e})"
+                        )
+                        break
+                except Exception:
+                    pass
                 logger.warning(
                     f"[Writer] Attempt {attempt} JSON parse failed ({e}); "
                     f"raw head: {raw_text[:200]!r}"
                 )
 
         if parsed is None:
-            raise RuntimeError(f"[Writer] Gemini returned invalid JSON twice: {last_err}")
+            raise RuntimeError(f"[Writer] Gemini returned invalid JSON three times: {last_err}")
 
         written = WrittenContent(
             title=parsed["title"],

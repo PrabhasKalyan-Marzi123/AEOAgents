@@ -21,6 +21,7 @@ from app.agents.distributor import DeploymentResult
 from marzi_travel.researcher import TravelResearcherAgent
 from marzi_travel.strategist import TravelStrategistAgent
 from marzi_travel.distributor import TravelDistributorAgent
+from marzi_travel.image_gen import generate_hero_image, inject_hero_image_into_html
 from marzi_travel import site_config
 
 logger = logging.getLogger(__name__)
@@ -75,6 +76,21 @@ async def run_travel_pipeline(config: TravelPipelineConfig) -> TravelPipelineRes
 
             logger.info("[TravelPipeline] Compiling...")
             compiled = compiler.run(written)
+
+            logger.info("[TravelPipeline] Generating hero image (Nano Banana)...")
+            img_path = generate_hero_image(
+                slug=compiled.slug,
+                title=compiled.title,
+                topic=destination,
+                images_dir=site_config.OUTPUT_DIR / "images",
+            )
+            if img_path is not None:
+                inject_hero_image_into_html(
+                    compiled.file_path,
+                    image_url=f"/images/{img_path.name}",
+                    alt=compiled.title,
+                )
+
             result.pages.append(compiled)
             logger.info(f"[TravelPipeline] Wrote {compiled.file_path}")
         except Exception as e:
