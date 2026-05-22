@@ -199,11 +199,14 @@ def _build_index_html(pages: list[CompiledPage]) -> str:
         slug = page.slug
         title_esc = escape(page.title, quote=True)
         desc_esc = escape(page.meta_description or "", quote=True)
-        tags_str = " &middot; ".join(page.tags[:3]) if page.tags else cat_display["label"]
+        if page.tags:
+            subtitle = f"{cat_display['label']} &middot; " + " &middot; ".join(page.tags[:3])
+        else:
+            subtitle = cat_display["label"]
 
         cards_html += f"""        <a class="card" href="/{slug}">
             <h2>{title_esc}</h2>
-            <span>{cat_display['label']} &middot; {tags_str}</span>
+            <span>{subtitle}</span>
         </a>
 """
 
@@ -238,6 +241,10 @@ def _build_index_html(pages: list[CompiledPage]) -> str:
     </style>
 </head>
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKZVBC55"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <div class="container">
         <h1>{escape(settings.site_name)}</h1>
         <p class="sub">AEO-optimized content &middot; Offline events for people above 55 in Bangalore &amp; Mumbai</p>
