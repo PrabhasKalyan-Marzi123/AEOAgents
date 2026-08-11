@@ -1,0 +1,22 @@
+{
+  "ts": "2026-08-11T20:24:59.492282+00:00",
+  "brand_url": "https://marzi.life",
+  "inventory_size": 2,
+  "recommendations": [
+    {
+      "topic": "How to Make New Friends After 55: Practical Tips for Offline Socializing",
+      "rationale": "This fills the 'how-to' category gap by providing actionable advice for a core audience need (social connection) and reinforces Marzi's offline-first approach.",
+      "target_category": "how-to",
+      "expected_intent": "Users seeking practical advice on expanding their social circle and combating loneliness in later life.",
+      "priority_score": 0.9,
+      "themes_addressed": [
+        "social connection",
+        "friendship",
+        "offline interaction",
+        "retirement"
+      ],
+      "max_similarity_to_existing": 0.531,
+      "closest_existing_slug": "marzi-fun-group-activities-for-seniors-above-55-in-bangalore"
+    }
+  ]
+}
