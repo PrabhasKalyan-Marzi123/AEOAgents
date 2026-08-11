@@ -32,6 +32,9 @@ jobs:
           path: ~/.cache/huggingface
           key: huggingface-sentence-transformers-v1
 
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
+
       - name: Install Poetry
         run: pip install poetry
 
