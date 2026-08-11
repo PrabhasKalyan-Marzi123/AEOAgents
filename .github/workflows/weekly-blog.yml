@@ -44,12 +44,17 @@ jobs:
       - name: Fetch live pages from Firebase
         run: poetry run python fetch_pages.py
 
-      - name: Run pipeline — auto recommend and publish 1 topic
+      - name: Run pipeline — generate and compile (no deploy)
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
+        run: poetry run python run_pipeline.py --auto 1 --no-deploy
+
+      - name: Deploy to Firebase
+        working-directory: firebase-hosting
+        env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-        run: poetry run python run_pipeline.py --auto 1
+        run: firebase deploy --only hosting --token "$FIREBASE_TOKEN"
 
       - name: Commit weekly recommendations file
         run: |
@@ -61,4 +66,5 @@ jobs:
 
       - name: Clean up fetched HTML files
         if: always()
-        run: rm -f ../firebase-hosting/public/*.html ../firebase-hosting/public/sitemap.xml ../firebase-hosting/public/robots.txt ../firebase-hosting/public/llms.txt ../firebase-hosting/public/index.html
+        working-directory: ${{ github.workspace }}
+        run: rm -f firebase-hosting/public/*.html firebase-hosting/public/sitemap.xml firebase-hosting/public/robots.txt firebase-hosting/public/llms.txt firebase-hosting/public/index.html
