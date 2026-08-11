@@ -34,7 +34,6 @@ from app.agents.researcher import _parse_json_lenient
 logger = logging.getLogger(__name__)
 
 _DATA_DIR = Path(__file__).resolve().parents[2] / "data"
-_RECOMMENDATIONS_LOG = _DATA_DIR / "recommendations.jsonl"
 
 # Brand tokens to drop before computing theme histograms (they appear everywhere).
 _BRAND_STOP = {
@@ -155,18 +154,20 @@ def _city_coverage(pages: list[CompiledPage], cities: list[str]) -> dict[str, in
 
 # ── Past-recommendations recall (avoid re-suggesting the same thing every run) ──
 
+def _recommendations_path() -> Path:
+    """Return the dated recommendations file path for today's run."""
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    return _DATA_DIR / f"recommendations-{today}.json"
+
+
 def _load_recent_recommendations(limit: int = 50) -> list[str]:
-    if not _RECOMMENDATIONS_LOG.exists():
-        return []
-    try:
-        lines = _RECOMMENDATIONS_LOG.read_text(encoding="utf-8").strip().splitlines()
-    except Exception:
-        return []
+    """Load topics from the last 10 weekly recommendation files."""
+    files = sorted(_DATA_DIR.glob("recommendations-*.json"))[-10:]
     recent_topics: list[str] = []
-    for line in lines[-25:]:  # last 25 runs
+    for f in files:
         try:
-            entry = json.loads(line)
-            for r in entry.get("recommendations", []):
+            data = json.loads(f.read_text(encoding="utf-8"))
+            for r in data.get("recommendations", []):
                 if isinstance(r, dict) and r.get("topic"):
                     recent_topics.append(r["topic"])
         except Exception:
@@ -334,8 +335,7 @@ def _append_recommendations_log(brand_url: str, inventory_size: int, recs: list[
         "inventory_size": inventory_size,
         "recommendations": [asdict(r) for r in recs],
     }
-    with _RECOMMENDATIONS_LOG.open("a", encoding="utf-8") as fh:
-        fh.write(json.dumps(entry) + "\n")
+    _recommendations_path().write_text(json.dumps(entry, indent=2), encoding="utf-8")
 
 
 # ── Public entry point ──
