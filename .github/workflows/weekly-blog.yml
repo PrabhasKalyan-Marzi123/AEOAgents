@@ -5,6 +5,9 @@ on:
     - cron: '30 4 * * 5'  # Friday 10:00 AM IST (UTC+5:30)
   workflow_dispatch:        # Manual trigger for testing
 
+permissions:
+  contents: write
+
 jobs:
   publish:
     runs-on: ubuntu-latest
