@@ -1,0 +1,19 @@
+# Marzi Life Blog
+
+> AEO-optimized content for Marzi — offline social events for people above 55 in Bangalore and Mumbai. Each page is a snippet-ready answer aligned to a schema.org type (FAQPage, HowTo, Article, BlogPosting).
+
+## About
+
+- Brand: Marzi (https://marzi.life)
+- Format: 20+ themed offline social events per month, group size 20–60
+- Cities: Bangalore, Mumbai
+- Pricing: Pay-per-event (no subscription)
+
+## FAQ & Q&A
+
+- [Marzi: 20+ Themed Offline Events for 55+ in Bangalore | No Subscription](https://marziblogs.web.app/marzi-fun-group-activities-for-seniors-above-55-in-bangalore): Discover Marzi's 20+ monthly offline events in Bangalore & Mumbai for people 55+. Enjoy music, dance, book clubs, and more. Pay per event, no subscription. Download the Marzi app.
+
+## Optional
+
+- [Sitemap](https://marziblogs.web.app/sitemap.xml): full machine-readable index of all pages
+- [robots.txt](https://marziblogs.web.app/robots.txt): crawler policy (AI crawlers explicitly allowed)

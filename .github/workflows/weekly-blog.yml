@@ -1,0 +1,58 @@
+name: Weekly Marzi Blog
+
+on:
+  schedule:
+    - cron: '30 4 * * 5'  # Friday 10:00 AM IST (UTC+5:30)
+  workflow_dispatch:        # Manual trigger for testing
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Cache HuggingFace models
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: huggingface-sentence-transformers-v1
+
+      - name: Install Poetry
+        run: pip install poetry
+
+      - name: Install dependencies
+        run: poetry install --no-interaction
+
+      - name: Fetch live pages from Firebase
+        run: poetry run python fetch_pages.py
+
+      - name: Run pipeline — auto recommend and publish 1 topic
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        run: poetry run python run_pipeline.py --auto 1
+
+      - name: Commit weekly recommendations file
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/recommendations-*.json
+          git diff --staged --quiet || git commit -m "chore: weekly blog recommendations $(date -u +%Y-%m-%d)"
+          git push
+
+      - name: Clean up fetched HTML files
+        if: always()
+        run: rm -f ../firebase-hosting/public/*.html ../firebase-hosting/public/sitemap.xml ../firebase-hosting/public/robots.txt ../firebase-hosting/public/llms.txt ../firebase-hosting/public/index.html
