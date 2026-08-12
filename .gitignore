@@ -35,3 +35,4 @@ docker-compose.override.yml
 
 # ChromaDB — rebuilt each run
 backend/data/chroma/
+travel-blogs/data/chroma/

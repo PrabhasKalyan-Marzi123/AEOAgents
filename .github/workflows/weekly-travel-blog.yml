@@ -1,0 +1,71 @@
+name: Weekly Travel Blog
+
+on:
+  schedule:
+    - cron: '30 4 * * 5'  # Friday 10:00 AM IST (UTC+5:30)
+  workflow_dispatch:        # Manual trigger for testing
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: travel-blogs
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Cache HuggingFace models
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: huggingface-sentence-transformers-v1
+
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
+
+      - name: Install Poetry
+        run: pip install poetry
+
+      - name: Install backend dependencies
+        working-directory: backend
+        run: poetry install --no-interaction --no-root
+
+      - name: Fetch live travel pages from Firebase
+        run: poetry -C ../backend run python fetch_travel_pages.py
+
+      - name: Run travel pipeline — generate and compile (no deploy)
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
+        run: poetry -C ../backend run python run_travel_pipeline.py --auto 1 --no-deploy
+
+      - name: Deploy to Firebase
+        working-directory: travel-blogs/firebase-hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        run: firebase deploy --only hosting --token "$FIREBASE_TOKEN"
+
+      - name: Commit weekly recommendations file
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/recommendations-*.json
+          git diff --staged --quiet || git commit -m "chore: weekly travel blog recommendations $(date -u +%Y-%m-%d)"
+          git push
+
+      - name: Clean up fetched HTML files
+        if: always()
+        working-directory: ${{ github.workspace }}
+        run: rm -f travel-blogs/firebase-hosting/public/*.html travel-blogs/firebase-hosting/public/sitemap.xml travel-blogs/firebase-hosting/public/robots.txt travel-blogs/firebase-hosting/public/llms.txt travel-blogs/firebase-hosting/public/index.html

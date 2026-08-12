@@ -1,11 +1,11 @@
 """Run the Marzi Holidays Travel Pipeline.
 
-Pass destinations manually — there is no recommender for the travel pipeline.
-
 Usage:
     python run_travel_pipeline.py --destination "Kerala backwaters trip for Indian travellers above 55"
     python run_travel_pipeline.py --destination "..." --no-deploy
-    python run_travel_pipeline.py                                    # uses DEFAULT_DESTINATIONS
+    python run_travel_pipeline.py --recommend 5          # print 5 recommendations and exit
+    python run_travel_pipeline.py --auto 1               # recommend 1 topic and run the pipeline
+    python run_travel_pipeline.py                        # uses DEFAULT_DESTINATIONS
 
 The pipeline:
   TravelResearcher (Gemini grounded GoogleSearch) → Strategist → Writer → Compiler → TravelDistributor
@@ -80,6 +80,24 @@ def main() -> int:
         type=str,
         default=None,
         help="Override brand URL (default: holidays.marzi.life)",
+    )
+    parser.add_argument(
+        "--recommend",
+        type=int,
+        metavar="N",
+        help="Print N topic recommendations and exit (scrapes holidays.marzi.life + dedup)",
+    )
+    parser.add_argument(
+        "--auto",
+        type=int,
+        metavar="N",
+        help="Recommend N topics then run the full pipeline on them",
+    )
+    parser.add_argument(
+        "--threshold",
+        type=float,
+        default=0.78,
+        help="Cosine similarity threshold for dedup (default 0.78)",
     )
     parser.add_argument(
         "--verbose",
@@ -157,10 +175,39 @@ def main() -> int:
             )
         return 0
 
-    # ── Generate ──
-    destinations = args.destination or list(site_config.DEFAULT_DESTINATIONS)
+    # ── Recommendation modes ──
+    if args.recommend or args.auto:
+        from marzi_travel.recommender import recommend_travel_topics
+
+        n = args.recommend if args.recommend else args.auto
+        print(f"\n{'='*60}\nTravel Topic Recommender (n={n}, threshold={args.threshold})\n{'='*60}")
+        recs = recommend_travel_topics(n=n, similarity_threshold=args.threshold)
+
+        if not recs:
+            print("No recommendations returned — check logs above.")
+            if args.recommend:
+                return 0
+            return 1
+
+        print(f"\n{'#':<3} {'Score':<6} {'Type':<14} {'Category':<14} Topic")
+        print(f"{'-'*3} {'-'*6} {'-'*14} {'-'*14} {'-'*55}")
+        for i, r in enumerate(recs, 1):
+            topic_short = r.topic if len(r.topic) <= 55 else r.topic[:52] + "..."
+            print(f"{i:<3} {r.priority_score:<6.2f} {r.topic_type:<14} {r.target_category:<14} {topic_short}")
+        print()
+        for i, r in enumerate(recs, 1):
+            print(f"  {i}. {r.topic}")
+            print(f"     Type: {r.topic_type} | Why: {r.rationale}")
+        print()
+
+        if args.recommend:
+            print(f"{'='*60}\nDone. Re-run with --auto {n} to feed these into the pipeline.\n{'='*60}")
+            return 0
+
+        destinations = [r.topic for r in recs]
+
     if not destinations:
-        print("No destinations to process. Pass --destination \"...\" or set DEFAULT_DESTINATIONS.")
+        print("No destinations to process. Pass --destination \"...\" or --auto N.")
         return 1
 
     from marzi_travel.pipeline import run_travel_pipeline, TravelPipelineConfig
