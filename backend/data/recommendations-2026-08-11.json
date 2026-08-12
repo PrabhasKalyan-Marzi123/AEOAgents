@@ -1,21 +1,21 @@
 {
-  "ts": "2026-08-11T20:31:21.206175+00:00",
+  "ts": "2026-08-11T20:39:53.683186+00:00",
   "brand_url": "https://marzi.life",
   "inventory_size": 2,
   "recommendations": [
     {
-      "topic": "How to Find Engaging Social Events for Seniors in Mumbai: Beyond Traditional Gatherings",
-      "rationale": "This topic directly addresses the under-covered city of Mumbai, fills a 'how-to' category gap, and highlights Marzi's unique event offerings compared to typical senior activities.",
+      "topic": "How to Find Engaging Upskilling Workshops for Seniors in Mumbai: Learn New Skills & Meet Peers",
+      "rationale": "This topic fills the 'how-to' category gap, addresses the under-covered city of Mumbai, and highlights a specific event theme (upskilling) not deeply explored, while also promoting social connection.",
       "target_category": "how-to",
-      "expected_intent": "Users searching for social activities or events specifically for seniors in Mumbai.",
-      "priority_score": 0.9,
+      "expected_intent": "Users searching for educational and social opportunities specifically for seniors in Mumbai.",
+      "priority_score": 0.95,
       "themes_addressed": [
+        "upskilling",
         "Mumbai",
-        "Social events",
-        "Senior activities",
-        "Social connection"
+        "learning",
+        "social connection"
       ],
-      "max_similarity_to_existing": 0.72,
+      "max_similarity_to_existing": 0.522,
       "closest_existing_slug": "marzi-fun-group-activities-for-seniors-above-55-in-bangalore"
     }
   ]
