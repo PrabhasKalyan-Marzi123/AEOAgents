@@ -1,0 +1,22 @@
+{
+  "ts": "2026-08-14T05:59:13.551041+00:00",
+  "brand_url": "https://marzi.life",
+  "inventory_size": 3,
+  "recommendations": [
+    {
+      "topic": "Offline vs. Online: Why In-Person Social Events for Seniors (55+) Lead to Stronger Connections",
+      "rationale": "This topic addresses the 'comparison' category gap, directly emphasizing Marzi's core 'offline-first' differentiator and the benefit of genuine connections.",
+      "target_category": "comparison",
+      "expected_intent": "Users weighing different options for social engagement, understanding the benefits of in-person interaction, or looking for genuine social connections.",
+      "priority_score": 0.95,
+      "themes_addressed": [
+        "offline-first",
+        "genuine connections",
+        "social engagement",
+        "age-specific"
+      ],
+      "max_similarity_to_existing": 0.63,
+      "closest_existing_slug": "marzi-fun-group-activities-for-seniors-above-55-in-bangalore"
+    }
+  ]
+}
