@@ -1,0 +1,23 @@
+{
+  "ts": "2026-08-19T09:11:13.231981+00:00",
+  "brand_url": "https://holidays.marzi.life",
+  "inventory_size": 12,
+  "recommendations": [
+    {
+      "topic": "Choosing the Right Travel Insurance for Indian Seniors: A Comparison Guide for International Trips",
+      "rationale": "Fills a critical gap in financial and medical safety planning, addressing a major worry for seniors traveling internationally.",
+      "target_category": "comparison",
+      "expected_intent": "travel insurance for seniors India, best travel insurance international senior",
+      "priority_score": 0.95,
+      "topic_type": "general",
+      "themes_addressed": [
+        "safety",
+        "finance",
+        "medical",
+        "preparation"
+      ],
+      "max_similarity_to_existing": 0.692,
+      "closest_existing_slug": "marzi-holidays-best-countries-for-indian-seniors-travelling-internationally-for"
+    }
+  ]
+}

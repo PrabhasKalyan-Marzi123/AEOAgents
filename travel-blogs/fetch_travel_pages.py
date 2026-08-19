@@ -33,7 +33,11 @@ def fetch_pages() -> int:
     failed = 0
 
     for url in urls:
-        slug = url.rstrip("/").rsplit("/", 1)[-1] or "index"
+        path_part = url.rstrip("/").rsplit("/", 1)[-1]
+        # Skip the homepage URL (slug would just be the domain name)
+        if not path_part or "." in path_part.split("-")[0]:
+            continue
+        slug = path_part
         out_path = OUTPUT_DIR / f"{slug}.html"
         try:
             page = httpx.get(url, timeout=30, follow_redirects=True)

@@ -206,6 +206,9 @@ def main() -> int:
 
         destinations = [r.topic for r in recs]
 
+    else:
+        destinations = args.destination or list(site_config.DEFAULT_DESTINATIONS)
+
     if not destinations:
         print("No destinations to process. Pass --destination \"...\" or --auto N.")
         return 1

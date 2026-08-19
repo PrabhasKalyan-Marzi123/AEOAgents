@@ -43,13 +43,13 @@ jobs:
         run: poetry install --no-interaction --no-root
 
       - name: Fetch live travel pages from Firebase
-        run: poetry -C ../backend run python fetch_travel_pages.py
+        run: poetry -C ../backend run python "${{ github.workspace }}/travel-blogs/fetch_travel_pages.py"
 
       - name: Run travel pipeline — generate and compile (no deploy)
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
-        run: poetry -C ../backend run python run_travel_pipeline.py --auto 1 --no-deploy
+        run: poetry -C ../backend run python "${{ github.workspace }}/travel-blogs/run_travel_pipeline.py" --auto 1 --no-deploy
 
       - name: Deploy to Firebase
         working-directory: travel-blogs/firebase-hosting
