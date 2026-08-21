@@ -1,0 +1,24 @@
+{
+  "ts": "2026-08-21T05:04:34.010380+00:00",
+  "brand_url": "https://holidays.marzi.life",
+  "inventory_size": 12,
+  "recommendations": [
+    {
+      "topic": "Schengen Visa for Indian Seniors: A Step-by-Step Guide for Europe Trips",
+      "rationale": "This fills a critical gap for Indian seniors planning international travel to Europe, directly addressing a common and complex logistical worry with a practical 'how-to' guide.",
+      "target_category": "how-to",
+      "expected_intent": "informational, navigational (visa application process)",
+      "priority_score": 0.95,
+      "topic_type": "general",
+      "themes_addressed": [
+        "visa",
+        "paperwork",
+        "Europe",
+        "international travel",
+        "logistics"
+      ],
+      "max_similarity_to_existing": 0.605,
+      "closest_existing_slug": "marzi-holidays-senior-friendly-europe-destinations-ranked-by-comfort-and-walkabi"
+    }
+  ]
+}
